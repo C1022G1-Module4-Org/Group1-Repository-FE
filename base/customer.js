@@ -1,3 +1,41 @@
+function movePage(nextPage) {
+    loadCustomer(nextPage);
+}
+
+function renderPage(customers) {
+    let page = "";
+    if (customers.number == customers.totalPages - 1 && customers.number > 0) {
+        page += `
+    <button class="page-item btn btn-primary" 
+    onclick="movePage(${customers.number - 1})">
+    <i class="ti-angle-left"></i>
+    </button>
+    `
+    }
+    for (let i = 1; i <= customers.totalPages; i++) {
+        let pageItem = $(`<button class="page-item number btn btn-primary"
+                      onclick="movePage(${i - 1})">
+                      ${i}
+                      </button>`);
+        if (i === customers.number + 1) {
+            pageItem.addClass("active");
+        } else {
+            pageItem.removeClass("active");
+        }
+        page += pageItem.prop('outerHTML');
+    }
+
+    if (customers.number == 0 && customers.number < customers.totalPages) {
+        page += `
+    <button class="page-item btn btn-primary" 
+    onclick="movePage(${customers.number + 1})">
+    <i class="ti-angle-right"></i>
+    </button>
+    `
+    }
+    $("#paging").html(page);
+}
+
 // - customers: danh sách sản phẩm cần được render lên browser
 function renderCustomers(customers) {
     let elements = "";
@@ -32,6 +70,7 @@ function loadCustomer(page) {
             "Content-Type": "application/json",
         }, success: function (data) {
             renderCustomers(data.content);
+            renderPage(data);
         }, error: function (error) {
             console.log(error);
         }
