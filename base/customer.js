@@ -1,3 +1,4 @@
+// phân trang
 function movePage(nextPage) {
     loadCustomer(nextPage);
 }
@@ -35,7 +36,7 @@ function renderPage(customers) {
     }
     $("#paging").html(page);
 }
-
+// List
 // - customers: danh sách sản phẩm cần được render lên browser
 function renderCustomers(customers) {
     let elements = "";
@@ -111,30 +112,78 @@ function deleteCustomer(id) {
         },
     });
 }
-function saveCustomer() {
-    let name1 = document.getElementById("name1").value;
-    let phoneNumber = document.getElementById("phoneNumber").value;
-    let address = document.getElementById("address").value;
-    let customerType = document.getElementById("customerType").value;
-    var objectJson={"name1": name1,
-        "phoneNumber":phoneNumber,
-        "address":address,
-        "customerType":customerType}
-    $.ajax({
-        type: "POST", url: `http://localhost:8080/customers`,
-        data : JSON.stringify(objectJson),
 
+// add
+$("#addCustomerForm").submit(function (event) {
+    debugger
+    event.preventDefault();
+    let name1 = $('#name1').val();
+    let phoneNumber = $('#phoneNumber').val();
+    let address = $("#address").val();
+    let customerTypeDTO = $("#customerTypeDTO").val();
+    saveCustomer(name1, phoneNumber, address, customerTypeDTO);
+});
+
+function saveCustomer (name1, phoneNumber, address, customerTypeDTO) {
+    debugger
+    $.ajax ({
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        url: `http://localhost:8080/customers`,
+        type: 'post',
+        data: JSON.stringify({
+            name1: name1,
+            phoneNumber: phoneNumber,
+            address: address,
+            customerTypeDTO: {id:customerTypeDTO},
+        }),
+        success: function (data) {
+            alert("Thêm khách hàng thành công!");
+            $('#modelId').hide();
+            $('body').removeClass('modal-open');
+            $('.modal-backdrop').remove();
+        },
+        error: function () {
+            alert("Lỗi khi thêm sản phẩm!");
+        },
+    })
+}
+
+function getSelectCustomerTypeList() {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/customer-type`,
         headers: {
             "Content-Type": "application/json",
-        }, success: alert("thanh cong"),
-
+        },
+        success: function (data) {
+            showCustomerTypeSelectOption(data);
+        },
         error: function (error) {
             console.log(error);
-        }
-    })
-    console.log(objectJson);
+        },
+    });
+}
 
-};
+function showCustomerTypeSelectOption(customerTypes) {
+    let element = "";
+    element += `
+  <select class="form-control" id="category" name="category">
+  <option>-- Chọn danh mục --</option>`
 
+    for (let customerType of customerTypes) {
+        element += `<option value="${customerType.id}">`
+        element +=customerType.name ;
+        `</option>`
+    }
 
+    `</select>`;
+    $("#customerTypeDTO").html(element);
+}
+
+$(document).ready(function () {
+    getSelectCustomerTypeList();
+});
 

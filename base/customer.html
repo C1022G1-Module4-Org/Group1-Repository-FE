@@ -80,7 +80,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
-                <form id="addProductForm">
+                <form id="addCustomerForm">
                     <div class="mb-3">
                         <label for="name" class="form-label">Tên sản phẩm</label>
                         <input type="text" class="form-control" id="name1" name="name" required>
@@ -94,11 +94,8 @@
                         <textarea class="form-control" id="address" name="address" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="customerType" class="form-label">Loại sản phẩm</label>
-                        <select class="form-select" id="customerType" name="customerType" required>
-                            <option value="" disabled selected>Chọn loại sản phẩm</option>
-                            <option value="type" ></option>
-                        </select>
+                        <label  class="form-label">Loại sản phẩm</label>
+                        <div class="col-md-12" id="customerTypeDTO">
                     </div>
                 </form>
             </div>
