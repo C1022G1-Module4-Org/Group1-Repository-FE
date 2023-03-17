@@ -31,3 +31,29 @@ function showList(){
         }
     })
 }
+function add() {
+    let content = $('#content').val();
+    let title = $('#title').val();
+    let author = $('#author').val();
+    let category = $('#category').val();
+    let player = {
+        content: content,
+        title: title,
+        author: author,
+        category: category,
+        status: status
+    }
+    $.ajax({
+        contentType: 'application/json',
+        dataType: 'json',
+        type: 'POST',
+        url: 'http://localhost:8080/rest/players',
+        data: JSON.stringify(player),
+        success: function (data) {
+        },
+        complete: function (data) {
+            console.log(data);
+            showList();
+        }
+    });
+}
