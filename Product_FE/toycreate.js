@@ -187,6 +187,31 @@ function getSelectToyTypeList() {
         },
     });
 }
+
+
+
+function showToyTypeSelectOption(toyType) {
+    let element = "";
+    element += `
+  <select class="form-control" id="typeToy" name="typeToy">
+  `
+
+    for (let toyTypes of toyType) {
+        element += `<option value="${toyTypes.name}">`
+        element +=toyTypes.name ;
+        `</option>`
+    }
+
+    `</select>`;
+    $("#toyTypeDTO").html(element);
+
+}
+
+
+$(document).ready(function () {
+    getSelectToyTypeList();
+});
+// update
 function getSelectToyTypeListUpdate() {
     $.ajax({
         type: "GET",
@@ -202,48 +227,25 @@ function getSelectToyTypeListUpdate() {
         },
     });
 }
-
-
-function showToyTypeSelectOption(toyType) {
+function showToyTypeSelectOptionUpdate(toyTypes) {
     let element = "";
     element += `
-  <select class="form-control" id="typetoy" name="typetoy">
+  <select class="form-control" id="typeToy-update" name="typeToy-update">
   `
 
-    for (let toyTypes of toyType) {
-        element += `<option value="${toyTypes.name}">`
-        element +=toyTypes.name ;
-        `</option>`
-    }
-
-    `</select>`;
-    $("#toyTypeDTO").html(element);
-    // $("#toy-typeDTO").html(element);
-}
-function showToyTypeSelectOptionUpdate(toyType) {
-    let element = "";
-    element += `
-  <select class="form-control" id="typeToy-update" name="typeToy">
-  `
-
-    for (let toyTypes of toyType) {
-        element += `<option value="${toyTypes.name}">`
-        element +=toyTypes.name ;
+    for (let toyType of toyTypes) {
+        element += `<option value="${toyType.name}">`
+        element +=toyType.name ;
         `</option>`
     }
 
     `</select>`;
     $("#toy-typeDTO").html(element);
-    $("#toyTypeDTO").html(element);
-    // $("#toy-typeDTO").html(element);
+
 }
 
-$(document).ready(function () {
-    getSelectToyTypeList();
-});
-// update
 $("#update-toy").submit(function(event){
-    debugger
+    // debugger
     event.preventDefault();
     let id = $('#update-id').val()
     let name = $('#update-name').val();
@@ -253,6 +255,7 @@ $("#update-toy").submit(function(event){
     let origin = $('#update-origin').val();
     let material = $("#update-material").val();
     let toyTypeDTO = $("#typeToy-update").val();
+    console.log(toyTypeDTO)
     updateToy(id,name, price,description,brand,origin,material, toyTypeDTO);
 });
 
@@ -287,7 +290,7 @@ function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO)
         },
     })
 }
-
+//Lấy thông tin sản phẩm bằng id
 function getToyInfoUpdate(id) {
     $.ajax({
         headers: {
@@ -301,6 +304,7 @@ function getToyInfoUpdate(id) {
             let element = "";
             let toy = data;
             element +=
+
                 `
       <div class="form-group">
         <div id="thongbao" class="text-danger" style="text-align: center;"></div>
@@ -346,7 +350,7 @@ function getToyInfoUpdate(id) {
       </div>
       <div class="form-group">
         <label class="control-label">Loại</label>
-        <div class="col-md-12" id="typeToy-update">
+        <div class="col-md-12" id="toy-typeDTO"> 
         </div>
       </div>
       <div class="modal-footer text-center flex items-center gap-2">
