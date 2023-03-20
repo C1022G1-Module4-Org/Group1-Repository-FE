@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promotion</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
+    <script src="promotion.js"></script>
+</head>
+
+<body>
+<!--    <h2>Danh sách Blogs</h2>-->
+<!--    <form action="" role="search" onsubmit="loadPromotion();return false;">-->
+<!--        <input type="text" id="idSearch" placeholder="Tìm kiếm...">-->
+<!--        <button type="submit" >Tìm kiếm</button>-->
+<!--    </form>-->
+<!--    <div id="searchPromotion"></div>-->
+<!--    <div id="listPromotions" class="container row mx-auto mx-0"></div>-->
+<!--    <div id="loadMoreContainer" class="d-flex justify-content-center"></div>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
+<!--        crossorigin="anonymous"></script>-->
+<div class="container">
+
+    <h1>Promotion List</h1>
+    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
+        Thêm mới sản phẩm
+    </button>
+        <form action="" role="search" onsubmit="loadPromotion();return false;">
+            <input type="text" id="idSearch" placeholder="Tìm kiếm...">
+            <button type="submit" >Tìm kiếm</button>
+        </form>
+    <div>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>startDay</th>
+                <th>endDay</th>
+                <th>discount</th>
+                <th>Type promotions</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody id="listPromotions"></tbody>
+        </table>
+    </div>
+
+</div>
+<div id="paging" class="text-center"></div>
+
+<!-- Modal delete -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
+     aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: red">Xóa sản phẩm</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="deletepromotion">
+                <div class="modal-body">
+                    <input hidden type="text" id="deleteId" name="deleteId">
+                    <p id="deleteName"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="submit" class="btn btn-danger">Yes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
