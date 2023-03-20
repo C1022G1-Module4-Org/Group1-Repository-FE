@@ -39,27 +39,29 @@ function renderPage(promotions) {
 // List
 // - customers: danh sách sản phẩm cần được render lên browser
 function renderPromotion(promotions) {
-    debugger
+    let stt = 1;
     let elements = "";
     for (let promotion of promotions) {
         elements +=
             `<tr>
-        <td >${promotion.id}</td>
+        <td >${stt++}</td>
         <td >${promotion.name}</td>
         <td >${promotion.startDay}</td>
         <td >${promotion.endDay}</td>
          <td >${promotion.discount}</td>
         <td >${promotion.promotionTypeDto.name}</td>
-        <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
+        <td>
+        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
-                onclick="updatePromotion(${promotion.id})">
-                <i class="fas fa-edit"></i>
-            </button></td>
+                onclick="getPromotionInfoUpdate(${promotion.id})">
+                Update
+            </button>
+            </td>
         <td>
         <button type="button"
                 className="btn btn-danger"
                 data-toggle="modal" data-target="#exampleModal"
-                onClick="getPromotionInfo(${promotion.id}, ${promotion.name})">
+                onclick="getPromotionInfo(${promotion.id}, '${promotion.name}')">
             Xóa
         </button>
         </td>
@@ -94,16 +96,18 @@ $(document).ready(function () {
 // Delete
 function getPromotionInfo(id, name) {
     document.getElementById("deleteId").value = id;
-    document.getElementById("deleteName").innerText =  name;
+    document.getElementById("deleteName").innerText = name;
 }
 
-$("#deletepromotion").submit(function (event) {
+$("#delete-promotion").submit(function (event) {
+    debugger
     event.preventDefault();
     let id = $("#deleteId").val();
     deletePromotion(id);
 });
 
 function deletePromotion(id) {
+    debugger
     $.ajax({
         type: "delete",
         url: `http://localhost:8080/promotion/${id}`,
@@ -240,7 +244,7 @@ function updatePromotion(id, name, startday, endday, discount, customerTypeDTO) 
     })
 }
 
-function getPromotionInfo(id) {
+function getPromotionInfoUpdate(id) {
     $.ajax({
         headers: {
             Accept: "application/json",
