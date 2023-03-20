@@ -37,30 +37,30 @@ function renderPage(toy) {
     $("#paging").html(page);
 }
 // List
-// - customers: danh sách sản phẩm cần được render lên browser
-function renderToy(toy) {
+// - Toy: danh sách sản phẩm cần được render lên browser
+function renderToy(toys) {
     let elements = "";
-    for (let toys of toy) {
+    for (let toy of toys) {
         elements +=
             `<tr>
-        <td >${toys.id}</td>
-        <td >${toys.name}</td>
-        <td >${toys.price}</td>
-        <td >${toys.description}</td>
-        <td >${toys.brand}</td>
-        <td >${toys.origin}</td>
-        <td >${toys.material}</td>
-        <td >${toys.typeOfToy.name}</td>
+        <td >${toy.id}</td>
+        <td >${toy.name}</td>
+        <td >${toy.price}</td>
+        <td >${toy.description}</td>
+        <td >${toy.brand}</td>
+        <td >${toy.origin}</td>
+        <td >${toy.material}</td>
+        <td >${toy.typeToyDTO.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
-                onclick="getToyInfo(${toys.id})">
-                <i class="fas fa-edit"></i>
+                onclick="getToyInfoUpdate(${toy.id})">
+                update
             </button></td>
         <td>
         <button type="button"
                 className="btn btn-danger"
                 data-toggle="modal" data-target="#exampleModal"
-                onClick="getToyInfo(${toys.id}, '${toys.name}')">
+                onClick="getToyInfo(${toy.id}, '${toy.name}')">
             Xóa
         </button>
         </td>
@@ -97,7 +97,7 @@ function getToyInfo(id,name) {
     document.getElementById("deleteName").innerText = "Xóa Đồ chơi " + name;
 }
 
-$("#delete-customer").submit(
+$("#delete-toy").submit(
     function (event) {
         event.preventDefault();
         let id = $("#deleteId").val();
@@ -126,12 +126,12 @@ function deleteToy(id) {
 
 
 // add
-$("#addCustomerForm").submit(
+$("#addToyForm").submit(
     function
         (event) {
         debugger
         event.preventDefault();
-        let name = $('#name').val();
+        let name = $('#name1').val();
         let price = $('#price').val();
         let description = $('#description').val();
         let brand = $('#brand').val();
@@ -148,7 +148,7 @@ function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: `http://localhost:8080/api/create`,
+        url: `http://localhost:8080/api`,
         type: 'POST',
         data: JSON.stringify({
             name: name,
@@ -157,7 +157,7 @@ function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
             brand: brand,
             origin: origin,
             material : material,
-            toyTypeDTO: {name:toyTypeDTO},
+            typeToyDTO: {name:toyTypeDTO},
         }),
         success: function (data) {
             alert("Thêm sản phẩm thành công!");
@@ -172,6 +172,7 @@ function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
 }
 
 function getSelectToyTypeList() {
+    debugger
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/toy-type`,
@@ -186,22 +187,55 @@ function getSelectToyTypeList() {
         },
     });
 }
+function getSelectToyTypeListUpdate() {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/toy-type`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        success: function (data) {
+            showToyTypeSelectOptionUpdate(data);
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
 
-function showToyTypeSelectOption(toyTypes) {
+
+function showToyTypeSelectOption(toyType) {
     let element = "";
     element += `
-  <select class="form-control" id="typeToy" name="typeToy">
+  <select class="form-control" id="typetoy" name="typetoy">
   `
 
-    for (let toyType of toyTypes) {
-        element += `<option value="${toyType.name}">`
-        element +=toyType.name ;
+    for (let toyTypes of toyType) {
+        element += `<option value="${toyTypes.name}">`
+        element +=toyTypes.name ;
         `</option>`
     }
 
     `</select>`;
     $("#toyTypeDTO").html(element);
+    // $("#toy-typeDTO").html(element);
+}
+function showToyTypeSelectOptionUpdate(toyType) {
+    let element = "";
+    element += `
+  <select class="form-control" id="typeToy-update" name="typeToy">
+  `
+
+    for (let toyTypes of toyType) {
+        element += `<option value="${toyTypes.name}">`
+        element +=toyTypes.name ;
+        `</option>`
+    }
+
+    `</select>`;
     $("#toy-typeDTO").html(element);
+    $("#toyTypeDTO").html(element);
+    // $("#toy-typeDTO").html(element);
 }
 
 $(document).ready(function () {
@@ -211,36 +245,38 @@ $(document).ready(function () {
 $("#update-toy").submit(function(event){
     debugger
     event.preventDefault();
-    let name = $('#name').val();
-    let price = $('#price').val();
-    let description = $('#description').val();
-    let brand = $('#brand').val();
-    let origin = $('#origin').val();
-    let material = $("#material").val();
-    let toyTypeDTO = $("#typeToy").val();
-    updateToy(name, price,description,brand,origin,material, toyTypeDTO);
+    let id = $('#update-id').val()
+    let name = $('#update-name').val();
+    let price = $('#update-price').val();
+    let description = $('#update-description').val();
+    let brand = $('#update-brand').val();
+    let origin = $('#update-origin').val();
+    let material = $("#update-material").val();
+    let toyTypeDTO = $("#typeToy-update").val();
+    updateToy(id,name, price,description,brand,origin,material, toyTypeDTO);
 });
 
-function updateToy(name, price,description,brand,origin,material, toyTypeDTO){
+function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO){
     debugger
     $.ajax ({
         type: "PUT",
-        url: `http://localhost:8080/customers/${id}`,
+        url: `http://localhost:8080/api/${id}`,
         headers: {
             Accept: "application/json",
             "Content-Type": "application/json",
         },
         data: JSON.stringify({
+            id : id,
             name: name,
             price: price,
             description: description,
             brand: brand,
             origin: origin,
             material : material,
-            toyTypeDTO: {name:toyTypeDTO},
+            typeToyDTO: {name:toyTypeDTO},
         }),
         success: function (data) {
-            alert("Sửa thông tin khách hàng thành công!");
+            alert("Sửa thông tin Sản phẩm thành công!");
             $("#update").hide();
             $("body").removeClass("modal-open");
             $(".modal-backdrop").remove();
@@ -252,7 +288,7 @@ function updateToy(name, price,description,brand,origin,material, toyTypeDTO){
     })
 }
 
-function getToyInfo(id) {
+function getToyInfoUpdate(id) {
     $.ajax({
         headers: {
             Accept: "application/json",
@@ -261,7 +297,7 @@ function getToyInfo(id) {
         type: "get",
         url: `http://localhost:8080/api/${id}`,
         success: function (data) {
-            getSelectToyTypeList();
+            getSelectToyTypeListUpdate();
             let element = "";
             let toy = data;
             element +=
@@ -310,7 +346,7 @@ function getToyInfo(id) {
       </div>
       <div class="form-group">
         <label class="control-label">Loại</label>
-        <div class="col-md-12" id="toy-typeDTO">
+        <div class="col-md-12" id="typeToy-update">
         </div>
       </div>
       <div class="modal-footer text-center flex items-center gap-2">
