@@ -7,14 +7,14 @@ function renderPage(customers) {
     let page = "";
     if (customers.number == customers.totalPages - 1 && customers.number > 0) {
         page += `
-    <button class="page-item btn btn-primary" 
+    <button class="page-item btn btn-primary btn-sm" 
     onclick="movePage(${customers.number - 1})">
-    <i class="ti-angle-left"></i>
+    Before
     </button>
     `
     }
     for (let i = 1; i <= customers.totalPages; i++) {
-        let pageItem = $(`<button class="page-item number btn btn-primary"
+        let pageItem = $(`<button class="page-item number btn btn-primary btn-sm"
                       onclick="movePage(${i - 1})">
                       ${i}
                       </button>`);
@@ -28,9 +28,9 @@ function renderPage(customers) {
 
     if (customers.number == 0 && customers.number < customers.totalPages) {
         page += `
-    <button class="page-item btn btn-primary" 
+    <button class="page-item btn btn-primary btn-sm" 
     onclick="movePage(${customers.number + 1})">
-    <i class="ti-angle-right"></i>
+    Next
     </button>
     `
     }
@@ -50,8 +50,8 @@ function renderCustomers(customers) {
         <td >${customer.customerTypeDTO.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
-                onclick="getCustomerInfo(${customer.id})">
-                <i class="fas fa-edit"></i>
+                onclick="getCustomerInfoUpdate(${customer.id})">
+                Sửa
             </button></td>
         <td>
         <button type="button"
@@ -90,11 +90,13 @@ $(document).ready(function () {
 
 // Delete
 function getCustomerInfo(id,name) {
+    debugger
     document.getElementById("deleteId").value = id;
-    document.getElementById("deleteName").innerText = "Xóa Customer " + name;
+    document.getElementById("deleteName").innerText = name;
 }
 
 $("#delete-customer").submit(function (event) {
+    debugger
     event.preventDefault();
     let id = $("#deleteId").val();
     deleteCustomer(id);
@@ -121,7 +123,7 @@ function deleteCustomer(id) {
 // add
 $("#addCustomerForm").submit(function (event) {
     debugger
-    event.preventDefault();
+    // event.preventDefault();
     let name = $('#name1').val();
     let phoneNumber = $('#phoneNumber').val();
     let address = $("#address").val();
@@ -186,13 +188,47 @@ function showCustomerTypeSelectOption(customerTypes) {
 
     `</select>`;
     $("#customerTypeDTO").html(element);
-    $("#customer-typeDTO").html(element);
 }
 
 $(document).ready(function () {
     getSelectCustomerTypeList();
 });
+
+
+
 // update
+function getSelectCustomerTypeListUpdate() {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/customer-type`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        success: function (data) {
+            showCustomerTypeSelectOptionUpdate(data);
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
+
+function showCustomerTypeSelectOptionUpdate(customerTypes) {
+    let element = "";
+    element += `
+  <select class="form-control" id="category-update" name="category">
+  `
+
+    for (let customerType of customerTypes) {
+        element += `<option value="${customerType.name}">`
+        element +=customerType.name ;
+        `</option>`
+    }
+
+    `</select>`;
+    $("#customer-typeDTO").html(element);
+
+}
 $("#update-customer").submit(function(event){
     debugger
     event.preventDefault();
@@ -200,7 +236,7 @@ $("#update-customer").submit(function(event){
     let name = $('#update-name').val();
     let phoneNumber = $('#update-phoneNumber').val();
     let address = $("#update-address").val();
-    let customerTypeDTO = $("#category").val();
+    let customerTypeDTO = $("#category-update").val();
     updateCustomer(id, name, phoneNumber, address, customerTypeDTO);
 })
 
@@ -232,8 +268,8 @@ function updateCustomer(id, name, phoneNumber, address, customerTypeDTO) {
         },
     })
 }
-
-function getCustomerInfo(id) {
+// lấy thông tin 1 khách hàng bằng id
+function getCustomerInfoUpdate(id) {
     $.ajax({
         headers: {
             Accept: "application/json",
@@ -242,7 +278,7 @@ function getCustomerInfo(id) {
         type: "get",
         url: `http://localhost:8080/customers/${id}`,
         success: function (data) {
-            getSelectCustomerTypeList();
+            getSelectCustomerTypeListUpdate();
             let element = "";
             let customer = data;
             element +=

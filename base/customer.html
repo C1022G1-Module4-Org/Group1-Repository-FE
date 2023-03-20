@@ -15,16 +15,10 @@
 
     <h1>Danh sách Khách hàng</h1>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-        Thêm mới sản phẩm
+        Thêm mới Khách hàng
     </button>
     <div class="mb-2">
-        <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="search..."
-                class="mb-3"
-        />
+        <input type="text" name="name" id="name" placeholder="search..." class="mb-3"/>
         <button type="button" onclick="loadCustomer()">Search</button>
     </div>
     <div>
@@ -43,24 +37,26 @@
             <tbody id="listCustomers"></tbody>
         </table>
     </div>
-
 </div>
 <div id="paging" class="text-center"></div>
+
 <!-- Modal delete -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1" style="color: red">Xóa sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: red">Xóa khách hàng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="" id="delete-customer">
                 <div class="modal-body">
-                    <input hidden type="text" id="deleteId" name="deleteId">
-                    <p id="deleteName"></p>
+                    <input hidden type="text" id="deleteId" name="deleteId"/>
+                    <span>Ban co muon xoa khach hang </span>
+                    <span style="color: #ea0000" id="deleteName"></span>
+                    <span> ?</span>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
@@ -76,17 +72,17 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Thêm mới khách hàng</h5>
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
             </div>
             <div class="modal-body">
                 <form id="addCustomerForm">
                     <div class="mb-3">
-                        <label for="name1" class="form-label">Tên sản phẩm</label>
+                        <label for="name1" class="form-label">Tên khách hàng<span class="span">*</span></label>
                         <input type="text" class="form-control" id="name1" name="name1" required>
                     </div>
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                        <label for="phoneNumber" class="form-label">Số điện thoại<span class="span">*</span></label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                     </div>
                     <div class="mb-3">
@@ -108,7 +104,7 @@
         </div>
     </div>
 </div>
-
+<!-- Modal update -->
 <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false"
      data-keyboard="false">
     <div class="modal-dialog modal-dialog-centered" role="document">
