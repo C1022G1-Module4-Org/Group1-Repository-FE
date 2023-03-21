@@ -53,13 +53,14 @@ function deleteById(id) {
 
 function addBlogFrom(){
 // $("#addBlogForm").submit(function (event) {
-    // debugger
+    debugger
     // // event.preventDefault();
     let content = $('#content').val();
     let title = $('#title').val();
     let author = $("#author").val();
-    let category = $("#category").val();
+    let category = $("#categoryAdd").val();
     saveBlog(content, title, author, category);
+    debugger
 };
 
 function saveBlog(content, title, author, category) {
@@ -98,7 +99,7 @@ function getSelectBlogTypeList() {
             "Content-Type": "application/json",
         },
         success: function (data) {
-            showCustomerTypeSelectOption(data);
+            showBlogTypeSelectOption(data);
         },
         error: function (error) {
             console.log(error);
@@ -106,10 +107,11 @@ function getSelectBlogTypeList() {
     });
 }
 
-function showCustomerTypeSelectOption(customerTypes) {
+function showBlogTypeSelectOption(customerTypes) {
+    debugger
     let element = "";
     element += `
-  <select class="form-control" id="category">
+  <select class="form-control" id="categoryAdd">
   `
 
     for (let customerType of customerTypes) {
