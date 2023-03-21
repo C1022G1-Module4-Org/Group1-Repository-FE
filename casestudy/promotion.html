@@ -6,32 +6,85 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promotion</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
     <script src="promotion.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-<!--    <h2>Danh sách Blogs</h2>-->
-<!--    <form action="" role="search" onsubmit="loadPromotion();return false;">-->
-<!--        <input type="text" id="idSearch" placeholder="Tìm kiếm...">-->
-<!--        <button type="submit" >Tìm kiếm</button>-->
-<!--    </form>-->
-<!--    <div id="searchPromotion"></div>-->
-<!--    <div id="listPromotions" class="container row mx-auto mx-0"></div>-->
-<!--    <div id="loadMoreContainer" class="d-flex justify-content-center"></div>-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
-<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
-<!--        crossorigin="anonymous"></script>-->
+<!-- Modal edit -->
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align:center" >Edit Promotion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" id = "update-promotion">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="addPromotion" tabindex="-1" role="dialog" aria-labelledby="exampleModalScrollableTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalScrollableTitle">Create Promotion</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form action="" id="addPromotionForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="name1">Name</label>
+                        <input type="text"
+                               class="form-control" name="name1" id="name1" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="startDay">Start Day</label>
+                        <input type="text"
+                               class="form-control" name="startDay" id="startDay" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDay">End Day</label>
+                        <input type="text"
+                               class="form-control" name="endDay" id="endDay" placeholder="">
+                    </div>
+                    <div class="form-group">
+                        <label for="discount">Discount</label>
+                        <input class="form-control" type="text" placeholder="" name="discount" id="discount">
+                    </div>
+                    <div class="form-group">
+                        <label for="promotionType">Promotion Type </label>
+                        <div id="promotionType"></div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <div class="container">
 
     <h1>Promotion List</h1>
-    <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
-        Thêm mới sản phẩm
-    </button>
+    <div>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPromotion">
+           Create Promotion
+        </button>
+    </div>
     <form action="" role="search" onsubmit="loadPromotion();return false;">
         <input type="text" id="idSearch" placeholder="Tìm kiếm...">
         <button type="submit">Tìm kiếm</button>
@@ -46,8 +99,8 @@
                 <th>endDay</th>
                 <th>discount</th>
                 <th>Type promotions</th>
-                <th></th>
-                <th></th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
             </thead>
             <tbody id="listPromotions"></tbody>
@@ -80,6 +133,7 @@
             </form>
         </div>
     </div>
+
 </div>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -92,6 +146,9 @@
         crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 <script src="promotion.js"></script>
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"-->
+<!--        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"-->
+<!--        crossorigin="anonymous"></script>-->
 </body>
 
 </html>
