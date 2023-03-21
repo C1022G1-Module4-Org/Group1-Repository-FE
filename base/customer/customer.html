@@ -13,58 +13,54 @@
 <body>
 <div class="container">
 
-    <h1>Danh sách Khách hàng</h1>
-    <button type="button" class="btn btn-primary btn-lg" onclick="saveCustomer()" data-toggle="modal" data-target="#modelId">
-        Thêm mới sản phẩm
+    <h1 style="text-align: center">Danh sách Khách hàng</h1>
+    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
+        Create
     </button>
     <div class="mb-2">
-        <input
-                type="text"
-                name="name"
-                id="name"
-                placeholder="search..."
-                class="mb-3"
-        />
+        <input type="text" name="name" id="name" placeholder="search..." class="mb-3"/>
         <button type="button" onclick="loadCustomer()">Search</button>
     </div>
     <div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>phone number</th>
-                <th>address</th>
-                <th>type of customer</th>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PHONE NUMBER</th>
+                <th>ADDRESS</th>
+                <th style="text-align: center">TYPE OFF CUSTOMER</th>
                 <th></th>
-
+                <th></th>
             </tr>
             </thead>
             <tbody id="listCustomers"></tbody>
         </table>
     </div>
-
 </div>
 <div id="paging" class="text-center"></div>
+
 <!-- Modal delete -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel1"
      aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1" style="color: red">Xóa sản phẩm</h5>
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: red;text-align:center" >Xóa khách hàng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <form action="" id="delete-customer">
                 <div class="modal-body">
-                    <input hidden type="text" id="deleteId" name="deleteId">
-                    <p id="deleteName"></p>
+                    <input hidden type="text" id="deleteId" name="deleteId"/>
+                    <span>Bạn có muốn xóa khách hàng </span>
+                    <span style="color: #ea0000" id="deleteName"></span>
+                    <span> ?</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-danger">Có</button>
                 </div>
             </form>
         </div>
@@ -76,17 +72,19 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới sản phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+                <h5 class="modal-title" style="text-align:center" id="exampleModalLabel">Thêm mới khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="addCustomerForm">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Tên sản phẩm</label>
-                        <input type="text" class="form-control" id="name1" name="name" required>
+                        <label for="name1" class="form-label">Tên khách hàng<span class="span">*</span></label>
+                        <input type="text" class="form-control" id="name1" name="name1" required>
                     </div>
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label">Số điện thoại</label>
+                        <label for="phoneNumber" class="form-label">Số điện thoại<span class="span">*</span></label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
                     </div>
                     <div class="mb-3">
@@ -94,19 +92,38 @@
                         <textarea class="form-control" id="address" name="address" rows="3"></textarea>
                     </div>
                     <div class="mb-3">
-                        <label  class="form-label">Loại sản phẩm</label>
-                        <div class="col-md-12" id="customerTypeDTO">
+                        <label  class="control-label">Danh mục<span class="span">*</span></label>
+                        <div class="col-md-12" id="customerTypeDTO" >
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+
+        </div>
+    </div>
+</div>
+<!-- Modal update -->
+
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align:center" >Sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" class="form-horizontal" id = "update-customer">
+                </form>
             </div>
         </div>
     </div>
 </div>
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
