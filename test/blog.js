@@ -136,4 +136,38 @@ $(document).ready(function () {
     getSelectBlogTypeList();
 });
 
+function renderPage(customers) {
+    let page = "";
+    if (customers.number == customers.totalPages - 1 && customers.number > 0) {
+        page += `
+    <button class="page-item btn btn-primary btn-sm" 
+    onclick="movePage(${customers.number - 1})">
+    Before
+    </button>
+    `
+    }
+    for (let i = 1; i <= customers.totalPages; i++) {
+        let pageItem = $(`<button class="page-item number btn btn-primary btn-sm"
+                      onclick="movePage(${i - 1})">
+                      ${i}
+                      </button>`);
+        if (i === customers.number + 1) {
+            pageItem.addClass("active");
+        } else {
+            pageItem.removeClass("active");
+        }
+        page += pageItem.prop('outerHTML');
+    }
+
+    if (customers.number == 0 && customers.number < customers.totalPages) {
+        page += `
+    <button class="page-item btn btn-primary btn-sm" 
+    onclick="movePage(${customers.number + 1})">
+    Next
+    </button>
+    `
+    }
+    $("#paging").html(page);
+}
+
 
