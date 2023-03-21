@@ -48,8 +48,7 @@ function getEmployeeIdAndName(id, name) {
 // list
 function renderEmployeeList(employeeList) {
     let elements = "";
-    let stt = 1;
-
+    let stt = (employeeList.number)*5 + 1;
     for (let employee of employeeList.content) {
         elements += `<tr>
           <td>${stt++}</td>
@@ -76,8 +75,9 @@ function renderEmployeeList(employeeList) {
     }
     $("#list-employee").html(elements);
 }
-
+// let e = 0;
 function getEmployeeList(page) {
+    // e++;
     let search = $("#search").val();
     $.ajax({
         type: "get",
