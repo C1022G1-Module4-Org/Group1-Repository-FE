@@ -1,6 +1,7 @@
 showList();
 
 function showList() {
+    debugger
     $.ajax({
         type: "GET",
         dataType: "json",
@@ -8,20 +9,26 @@ function showList() {
         success: function (data) {
             console.log(data);
             let element = '';
-            for (let i = 0; i < data.length; i++) {
+            for (let i = 0; i < data.content.length; i++) {
+                debugger
                 element += `<tr>`
                 element += `<th>${i + 1}</th>`
-                element += `<td>${data[i].content}</td>`
-                element += `<td>${data[i].title}</td>`
-                element += `<td>${data[i].author}</td>`
-                element += `<td>${data[i].category.name}</td>`
-                element += (`<td><button onclick="deleteById(` + data[i].id + `)">Delete</button></td>`);
+                element += `<td>${data.content[i].content}</td>`
+                element += `<td>${data.content[i].title}</td>`
+                element += `<td>${data.content[i].author}</td>`
+                element += `<td>${data.content[i].categoryDto.name}</td>`
+                element += (`<td><button onclick="deleteById(` + data.content[i].id + `)">Delete</button></td>`);
                 element += `</tr>`
             }
             $('#blogList').html(element);
         }
+
     })
+
 }
+// $(document).ready(function () {
+//     showList();
+// }
 
 $(document).ready(function () {
     let nameSearch = "";
@@ -38,6 +45,7 @@ $(document).ready(function () {
         showList(nameSearch, sizePage);
     })
 })
+
 //delete
 function deleteById(id) {
     debugger
@@ -51,7 +59,7 @@ function deleteById(id) {
     })
 }
 
-function addBlogFrom(){
+function addBlogFrom() {
 // $("#addBlogForm").submit(function (event) {
     debugger
     // // event.preventDefault();
@@ -65,7 +73,7 @@ function addBlogFrom(){
 
 function saveBlog(content, title, author, category) {
     debugger
-    $.ajax ({
+    $.ajax({
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -74,9 +82,9 @@ function saveBlog(content, title, author, category) {
         type: 'POST',
         data: JSON.stringify({
             content: content,
-        title: title,
-        author: author,
-         category: {id:category},
+            title: title,
+            author: author,
+            category: {id: category},
         }),
         success: function (data) {
             alert("Thêm blog thành công!");
@@ -116,7 +124,7 @@ function showBlogTypeSelectOption(customerTypes) {
 
     for (let customerType of customerTypes) {
         element += `<option value="${customerType.id}">`
-        element +=customerType.name ;
+        element += customerType.name;
         `</option>`
     }
 
