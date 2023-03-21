@@ -25,11 +25,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>id</th>
-                <th>name</th>
-                <th>phone number</th>
-                <th>address</th>
-                <th>type of customer</th>
+                <th>ID</th>
+                <th>NAME</th>
+                <th>PHONE NUMBER</th>
+                <th>ADDRESS</th>
+                <th style="text-align: center">TYPE OFF CUSTOMER</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -46,7 +46,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel1" style="color: red">Xóa khách hàng</h5>
+                <h5 class="modal-title" id="exampleModalLabel1" style="color: red;text-align:center" >Xóa khách hàng</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -54,13 +54,13 @@
             <form action="" id="delete-customer">
                 <div class="modal-body">
                     <input hidden type="text" id="deleteId" name="deleteId"/>
-                    <span>Ban co muon xoa khach hang </span>
+                    <span>Bạn có muốn xóa khách hàng </span>
                     <span style="color: #ea0000" id="deleteName"></span>
                     <span> ?</span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
-                    <button type="submit" class="btn btn-danger">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Không</button>
+                    <button type="submit" class="btn btn-danger">Có</button>
                 </div>
             </form>
         </div>
@@ -72,8 +72,10 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Thêm mới khách hàng</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+                <h5 class="modal-title" style="text-align:center" id="exampleModalLabel">Thêm mới khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
                 <form id="addCustomerForm">
@@ -105,21 +107,22 @@
     </div>
 </div>
 <!-- Modal update -->
-<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false"
-     data-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered" role="document">
+
+<div class="modal fade" id="update" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="mt-3">
-                <button type="button" class="close" data-dismiss="modal">X</button>
-                <h3 style="text-align:center; color: #ea0000;">SỬA THÔNG TIN KHÁCH HÀNG</h3>
+            <div class="modal-header">
+                <h5 class="modal-title" style="text-align:center" >Sửa thông tin khách hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body" id="update-form">
+            <div class="modal-body">
                 <form role="form" class="form-horizontal" id = "update-customer">
                 </form>
             </div>
         </div>
     </div>
-</div>
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->

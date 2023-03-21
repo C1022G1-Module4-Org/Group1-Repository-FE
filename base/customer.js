@@ -47,7 +47,7 @@ function renderCustomers(customers) {
         <td >${customer.name}</td>
         <td >${customer.address}</td>
         <td >${customer.phoneNumber}</td>
-        <td >${customer.customerTypeDTO.name}</td>
+        <td style="text-align: center">${customer.customerTypeDTO.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
                 onclick="getCustomerInfoUpdate(${customer.id})">
