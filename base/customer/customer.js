@@ -3,22 +3,23 @@ function movePage(nextPage) {
     loadCustomer(nextPage);
 }
 
-function renderPage(blogs) {
+function renderPage(customers) {
     let page = "";
-    if (blogs.number == blogs.totalPages - 1 && blogs.number > 0) {
+    if (customers.number <= customers.totalPages - 1
+        && customers.number > 0) {
         page += `
     <button class="page-item btn btn-primary btn-sm" 
-    onclick="movePage(${blogs.number - 1})">
-    Before
+    onclick="movePage(${customers.number - 1})">
+       Previous
     </button>
     `
     }
-    for (let i = 1; i <= blogs.totalPages; i++) {
+    for (let i = 1; i <= customers.totalPages; i++) {
         let pageItem = $(`<button class="page-item number btn btn-primary btn-sm"
                       onclick="movePage(${i - 1})">
                       ${i}
                       </button>`);
-        if (i === blogs.number + 1) {
+        if (i === customers.number + 1) {
             pageItem.addClass("active");
         } else {
             pageItem.removeClass("active");
@@ -26,37 +27,41 @@ function renderPage(blogs) {
         page += pageItem.prop('outerHTML');
     }
 
-    if (blogs.number == 0 && blogs.number < blogs.totalPages) {
+    if (customers.number >= 0 && customers.number < customers.totalPages) {
         page += `
     <button class="page-item btn btn-primary btn-sm" 
-    onclick="movePage(${blogs.number + 1})">
+    onclick="movePage(${customers.number + 1})">
     Next
     </button>
     `
     }
     $("#paging").html(page);
 }
+
 // List
-function renderBlog(blogs) {
+// - customers: danh sách sản phẩm cần được render lên browser
+function renderCustomers(customers) {
     let elements = "";
-    for (let blogs of customers) {
+    let stt = 1;
+
+    for (let customer of customers) {
         elements +=
             `<tr>
-        <td >${blogs.id}</td>
-        <td >${blogs.name}</td>
-        <td >${blogs.address}</td>
-        <td >${blogs.phoneNumber}</td>
-        <td style="text-align: center">${blogs.categoryDto.name}</td>
+        <td >${stt++}</td>
+        <td >${customer.name}</td>
+        <td >${customer.address}</td>
+        <td >${customer.phoneNumber}</td>
+        <td style="text-align: center">${customer.customerTypeDTO.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
-                onclick="getCustomerInfoUpdate(${blogs.id})">
+                onclick="getCustomerInfoUpdate(${customer.id})">
                 Sửa
             </button></td>
         <td>
         <button type="button"
-                className="btn btn-danger"
+                class="btn btn-danger btn-sm"
                 data-toggle="modal" data-target="#exampleModal"
-                onClick="getCustomerInfo(${blogs.id}, '${blogs.name}')">
+                onClick="getCustomerInfo(${customer.id}, '${customer.name}')">
             Xóa
         </button>
         </td>
@@ -66,7 +71,7 @@ function renderBlog(blogs) {
     }
 }
 
-function loadBlog(page) {
+function loadCustomer(page) {
     let search = document.getElementById("name").value;
     $.ajax({
         type: "GET", url: `http://localhost:8080/customers?page=${page ? page : "0"}&name=` + search,
@@ -120,7 +125,7 @@ function deleteCustomer(id) {
 }
 
 // add
-$("#addCustomerForm").submit(function (event) {
+function add() {
     debugger
     // event.preventDefault();
     let name = $('#name1').val();
@@ -128,11 +133,11 @@ $("#addCustomerForm").submit(function (event) {
     let address = $("#address").val();
     let customerTypeDTO = $("#category").val();
     saveCustomer(name, phoneNumber, address, customerTypeDTO);
-});
+}
 
-function saveCustomer (name, phoneNumber, address, customerTypeDTO) {
+function saveCustomer(name, phoneNumber, address, customerTypeDTO) {
     debugger
-    $.ajax ({
+    $.ajax({
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
@@ -143,17 +148,22 @@ function saveCustomer (name, phoneNumber, address, customerTypeDTO) {
             name: name,
             phoneNumber: phoneNumber,
             address: address,
-            customerTypeDTO: {name:customerTypeDTO},
+            customerTypeDTO: {name: customerTypeDTO},
         }),
-        success: function (data) {
+        success: function () {
             alert("Thêm khách hàng thành công!");
             $('#modelId').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         },
-        error: function () {
-            alert("Lỗi khi thêm sản phẩm!");
-        },
+        error: function (error) {
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
+        }
+        ,
     })
 }
 
@@ -181,7 +191,7 @@ function showCustomerTypeSelectOption(customerTypes) {
 
     for (let customerType of customerTypes) {
         element += `<option value="${customerType.name}">`
-        element +=customerType.name ;
+        element += customerType.name;
         `</option>`
     }
 
@@ -220,7 +230,7 @@ function showCustomerTypeSelectOptionUpdate(customerTypes) {
 
     for (let customerType of customerTypes) {
         element += `<option value="${customerType.name}">`
-        element +=customerType.name ;
+        element += customerType.name;
         `</option>`
     }
 
@@ -228,7 +238,8 @@ function showCustomerTypeSelectOptionUpdate(customerTypes) {
     $("#customer-typeDTO").html(element);
 
 }
-$("#update-customer").submit(function(event){
+
+function update() {
     debugger
     event.preventDefault();
     let id = $("#update-id").val();
@@ -237,11 +248,11 @@ $("#update-customer").submit(function(event){
     let address = $("#update-address").val();
     let customerTypeDTO = $("#category-update").val();
     updateCustomer(id, name, phoneNumber, address, customerTypeDTO);
-})
+}
 
 function updateCustomer(id, name, phoneNumber, address, customerTypeDTO) {
     debugger
-    $.ajax ({
+    $.ajax({
         type: "PUT",
         url: `http://localhost:8080/customers/${id}`,
         headers: {
@@ -253,7 +264,7 @@ function updateCustomer(id, name, phoneNumber, address, customerTypeDTO) {
             name: name,
             phoneNumber: phoneNumber,
             address: address,
-            customerTypeDTO: { name: customerTypeDTO },
+            customerTypeDTO: {name: customerTypeDTO},
         }),
         success: function (data) {
             alert("Sửa thông tin khách hàng thành công!");
@@ -262,11 +273,17 @@ function updateCustomer(id, name, phoneNumber, address, customerTypeDTO) {
             $(".modal-backdrop").remove();
             loadCustomer();
         },
-        error: function () {
-            alert("Lỗi khi sửa sản phẩm!");
+        error: function (error) {
+            console.log(error);
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#error-${key}`)) {
+                    $(`#error-${key}`).text(error.responseJSON[key]);
+                }
+            }
         },
     })
 }
+
 // lấy thông tin 1 khách hàng bằng id
 function getCustomerInfoUpdate(id) {
     $.ajax({
@@ -289,36 +306,39 @@ function getCustomerInfoUpdate(id) {
         <input type="hidden" id="update-id" value="${customer.id}">
       </div>
       <div class="form-group">
-        <label for="update-name" class="control-label col-xs-3">Tên sản phẩm</label>
+        <label for="update-name" class="control-label col-xs-3">Tên khách hàng<span class="span" style="color: red;">*</span></label>
         <div class="col-md-12">
           <input type="text" class="form-control" id="update-name" value="${customer.name}">
+          <div class="error-message text-danger" id="error-name"></div>
         </div>
       </div>
       <div class="form-group">
-        <label for="update-phoneNumber" class="control-label col-xs-3">Số điện thoại</label>
+        <label for="update-phoneNumber" class="control-label col-xs-3">Số điện thoại<span class="span" style="color: red;">*</span></label>
         <div class="col-md-12">
           <input type="text" class="form-control" id="update-phoneNumber" value="${customer.phoneNumber}">
+          <div class="error-message text-danger" id="error-phoneNumber"></div>
         </div>
       </div>
       <div class="form-group">
-        <label for="update-address" class="control-label col-xs-3">Địa chỉ</label>
+        <label for="update-address" class="control-label col-xs-3">Địa chỉ<span class="span" style="color: red;">*</span></label>
         <div class="col-md-12">
           <input required type="text" class="form-control" id="update-address" name="update-address" value="${customer.address}">
+          <div class="error-message text-danger" id="error-address"></div>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label">Danh mục</label>
+        <label class="control-label">Danh mục<span class="span" style="color: red;">*</span></label>
         <div class="col-md-12" id="customer-typeDTO">
         </div>
       </div>
       <div class="modal-footer text-center flex items-center gap-2">
-        <button type="submit" id="btnSave" class="btn btn-success">Lưu</button>
+        <button type="button" id="btnSave" class="btn btn-success" onclick="update()">Lưu</button>
         <button class="btn btn-danger" data-dismiss="modal">Hủy bỏ</a>
       </div>
       `
             $("#update-customer").html(element);
         },
-        error: function(error) {
+        error: function (error) {
             console.log(error);
         }
     })
