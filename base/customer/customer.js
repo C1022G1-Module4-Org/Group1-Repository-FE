@@ -3,22 +3,22 @@ function movePage(nextPage) {
     loadCustomer(nextPage);
 }
 
-function renderPage(customers) {
+function renderPage(blogs) {
     let page = "";
-    if (customers.number == customers.totalPages - 1 && customers.number > 0) {
+    if (blogs.number == blogs.totalPages - 1 && blogs.number > 0) {
         page += `
     <button class="page-item btn btn-primary btn-sm" 
-    onclick="movePage(${customers.number - 1})">
+    onclick="movePage(${blogs.number - 1})">
     Before
     </button>
     `
     }
-    for (let i = 1; i <= customers.totalPages; i++) {
+    for (let i = 1; i <= blogs.totalPages; i++) {
         let pageItem = $(`<button class="page-item number btn btn-primary btn-sm"
                       onclick="movePage(${i - 1})">
                       ${i}
                       </button>`);
-        if (i === customers.number + 1) {
+        if (i === blogs.number + 1) {
             pageItem.addClass("active");
         } else {
             pageItem.removeClass("active");
@@ -26,10 +26,10 @@ function renderPage(customers) {
         page += pageItem.prop('outerHTML');
     }
 
-    if (customers.number == 0 && customers.number < customers.totalPages) {
+    if (blogs.number == 0 && blogs.number < blogs.totalPages) {
         page += `
     <button class="page-item btn btn-primary btn-sm" 
-    onclick="movePage(${customers.number + 1})">
+    onclick="movePage(${blogs.number + 1})">
     Next
     </button>
     `
@@ -37,27 +37,26 @@ function renderPage(customers) {
     $("#paging").html(page);
 }
 // List
-// - customers: danh sách sản phẩm cần được render lên browser
-function renderCustomers(customers) {
+function renderBlog(blogs) {
     let elements = "";
-    for (let customer of customers) {
+    for (let blogs of customers) {
         elements +=
             `<tr>
-        <td >${customer.id}</td>
-        <td >${customer.name}</td>
-        <td >${customer.address}</td>
-        <td >${customer.phoneNumber}</td>
-        <td style="text-align: center">${customer.customerTypeDTO.name}</td>
+        <td >${blogs.id}</td>
+        <td >${blogs.name}</td>
+        <td >${blogs.address}</td>
+        <td >${blogs.phoneNumber}</td>
+        <td style="text-align: center">${blogs.categoryDto.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
-                onclick="getCustomerInfoUpdate(${customer.id})">
+                onclick="getCustomerInfoUpdate(${blogs.id})">
                 Sửa
             </button></td>
         <td>
         <button type="button"
                 className="btn btn-danger"
                 data-toggle="modal" data-target="#exampleModal"
-                onClick="getCustomerInfo(${customer.id}, '${customer.name}')">
+                onClick="getCustomerInfo(${blogs.id}, '${blogs.name}')">
             Xóa
         </button>
         </td>

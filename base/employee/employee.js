@@ -139,6 +139,7 @@ $("#add-employee").submit(function (event) {
 });
 
 function addEmployee(name, dateOfBirth, gender, address, phoneNumber, levelEmployeeDTO) {
+    debugger;
     $.ajax({
         headers: {
             Accept: "application/json",
