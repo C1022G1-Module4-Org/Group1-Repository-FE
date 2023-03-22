@@ -71,7 +71,7 @@ function renderCustomers(customers) {
     }
 }
 
-function loadCustomer(page) {
+function loadBlog(page) {
     let search = document.getElementById("name").value;
     $.ajax({
         type: "GET", url: `http://localhost:8080/customers?page=${page ? page : "0"}&name=` + search,
@@ -88,7 +88,7 @@ function loadCustomer(page) {
 
 };
 $(document).ready(function () {
-    loadCustomer();
+    loadBlog();
 });
 
 
