@@ -71,7 +71,7 @@ function renderCustomers(customers) {
     }
 }
 
-function loadBlog(page) {
+function loadCustomer(page) {
     let search = document.getElementById("name").value;
     $.ajax({
         type: "GET", url: `http://localhost:8080/customers?page=${page ? page : "0"}&name=` + search,
@@ -88,7 +88,7 @@ function loadBlog(page) {
 
 };
 $(document).ready(function () {
-    loadBlog();
+    loadCustomer();
 });
 
 
@@ -162,7 +162,6 @@ function saveCustomer(name, phoneNumber, address, customerTypeDTO) {
                     $(`#${key}-error`).text(error.responseJSON[key]);
                 }
             }
-            alert("Lỗi khi thêm khách hàng!");
         }
         ,
     })
@@ -280,7 +279,6 @@ function updateCustomer(id, name, phoneNumber, address, customerTypeDTO) {
                     $(`#error-${key}`).text(error.responseJSON[key]);
                 }
             }
-            alert("Lỗi khi sửa sản phẩm!");
         },
     })
 }
