@@ -189,6 +189,51 @@
     </style>
 </head>
 <body>
+<header>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="navbar navbar-expand-lg navbar-light bg-dark" id="header-nav">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#"><img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/da99b81a-3220-444b-bac9-3b21f51335b8/d4yoay9-ea3327f9-15e0-49b0-80e7-c625d6327b44.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RhOTliODFhLTMyMjAtNDQ0Yi1iYWM5LTNiMjFmNTEzMzViOFwvZDR5b2F5OS1lYTMzMjdmOS0xNWUwLTQ5YjAtODBlNy1jNjI1ZDYzMjdiNDQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BjAaGd9E9Lmbmzyy3Hl4cMRk40vFVUGOVrWapH6hYh0" alt=""
+                                                          style="width: 80px;height: 60px"></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false"
+                            aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarScroll">
+                        <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+                            style="--bs-scroll-height: 100px;">
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="/customer/home.html">Trang chủ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="/blog/blog.html">Blog</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="/product/toycreate.html">Product</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="/employee/employee.html">Employee</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="/customer/customer.html">Customer</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="login.jsp">Supplier</a>
+                            </li>
+                        </ul>
+                        <form class="d-flex" style="margin-top: 16px; margin-right: 10px">
+                            <input class="form-control me-2" name="name" id="name" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                            <button class="btn btn-outline-warning" type="button" style="width: 136px" onclick="loadCustomer()">Tìm kiếm</button>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </div>
+</header>
+
 <div class="container">
 
     <h1 style="text-align: center">Danh sách Khách hàng</h1>
