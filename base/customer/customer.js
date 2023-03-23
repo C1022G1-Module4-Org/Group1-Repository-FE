@@ -95,7 +95,7 @@ function loadCustomer(page) {
 
 };
 $(document).ready(function () {
-    loadBlog();
+    loadCustomer();
 });
 
 
@@ -248,7 +248,7 @@ function showCustomerTypeSelectOptionUpdate(customerTypes) {
 
 function update() {
     debugger
-    event.preventDefault();
+    // event.preventDefault();
     let id = $("#update-id").val();
     let name = $('#update-name').val();
     let phoneNumber = $('#update-phoneNumber').val();
