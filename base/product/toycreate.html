@@ -5,10 +5,19 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/base/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <style>
@@ -34,7 +43,78 @@
         }
 
     </style>
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+<body>
+<nav class="navbar navbar-expand bg-black navbar-dark sticky-top" >
+    <div class="col-lg-12 d-flex justify-content-center fst-italic">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-black sticky-top">
+            <div class="container">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent1">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/home.html?_ijt=8vreobi7satft40sh71uagoumj&_ij_reload=RELOAD_ON_SAVE">
+                                <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/da99b81a-3220-444b-bac9-3b21f51335b8/d4yoay9-ea3327f9-15e0-49b0-80e7-c625d6327b44.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2RhOTliODFhLTMyMjAtNDQ0Yi1iYWM5LTNiMjFmNTEzMzViOFwvZDR5b2F5OS1lYTMzMjdmOS0xNWUwLTQ5YjAtODBlNy1jNjI1ZDYzMjdiNDQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.BjAaGd9E9Lmbmzyy3Hl4cMRk40vFVUGOVrWapH6hYh0" alt="" width="150" height="50">
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/blog/blog.html?_ijt=q256b1fpambs6a49gj27v68oc0&_ij_reload=RELOAD_ON_SAVE">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-house-door" viewBox="0 0 16 16">
+                                    <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+                                </svg>
+                                Cẩm nang
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/product/toycreate.html?#">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-rolodex" viewBox="0 0 16 16">
+                                    <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                    <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
+                                </svg>
+                                Sản phẩm
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/employee/employee.html?_ijt=lil4ft0hljlhir1rf25hghc7hm&_ij_reload=RELOAD_ON_SAVE">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-rolodex" viewBox="0 0 16 16">
+                                    <path d="M8 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                                    <path d="M1 1a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h.5a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5.5.5 0 0 1 1 0 .5.5 0 0 0 .5.5h.5a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H6.707L6 1.293A1 1 0 0 0 5.293 1H1Zm0 1h4.293L6 2.707A1 1 0 0 0 6.707 3H15v10h-.085a1.5 1.5 0 0 0-2.4-.63C11.885 11.223 10.554 10 8 10c-2.555 0-3.886 1.224-4.514 2.37a1.5 1.5 0 0 0-2.4.63H1V2Z"/>
+                                </svg>
+                                Nhân viên
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/customer/customer.html?name1=Naruto&phoneNumber=0898175813&address=k03%2F10&category=vippro">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-door-open" viewBox="0 0 16 16">
+                                    <path d="M8.5 10c-.276 0-.5-.448-.5-1s.224-1 .5-1 .5.448.5 1-.224 1-.5 1z"/>
+                                    <path d="M10.828.122A.5.5 0 0 1 11 .5V1h.5A1.5 1.5 0 0 1 13 2.5V15h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117zM11.5 2H11v13h1V2.5a.5.5 0 0 0-.5-.5zM4 1.934V15h6V1.077l-6 .857z"/>
+                                </svg>
+                                Khách hàng
+                            </a>
+                        </li>
+                        <li class="nav-item navbar-brand">
+                            <a class="nav-link active text-light" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/promotion/promotion.html?_ijt=abu81m195tftcuqa16uloop7pq&_ij_reload=RELOAD_ON_SAVE">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-receipt-cutoff" viewBox="0 0 16 16">
+                                    <path d="M3 4.5a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 1 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5zM11.5 4a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1zm0 2a.5.5 0 0 0 0 1h1a.5.5 0 0 0 0-1h-1z"/>
+                                    <path d="M2.354.646a.5.5 0 0 0-.801.13l-.5 1A.5.5 0 0 0 1 2v13H.5a.5.5 0 0 0 0 1h15a.5.5 0 0 0 0-1H15V2a.5.5 0 0 0-.053-.224l-.5-1a.5.5 0 0 0-.8-.13L13 1.293l-.646-.647a.5.5 0 0 0-.708 0L11 1.293l-.646-.647a.5.5 0 0 0-.708 0L9 1.293 8.354.646a.5.5 0 0 0-.708 0L7 1.293 6.354.646a.5.5 0 0 0-.708 0L5 1.293 4.354.646a.5.5 0 0 0-.708 0L3 1.293 2.354.646zm-.217 1.198.51.51a.5.5 0 0 0 .707 0L4 1.707l.646.647a.5.5 0 0 0 .708 0L6 1.707l.646.647a.5.5 0 0 0 .708 0L8 1.707l.646.647a.5.5 0 0 0 .708 0L10 1.707l.646.647a.5.5 0 0 0 .708 0L12 1.707l.646.647a.5.5 0 0 0 .708 0l.509-.51.137.274V15H2V2.118l.137-.274z"/>
+                                </svg>
+                                Mã giảm giá
+                            </a>
+                        </li>
+                    </ul>
+                    <nav class="navbar navbar-light bg-black">
+                        <div class="container-fluid">
+                            <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Tìm kiếm" aria-label="Search" name="search" id="search">
+                                <button class="btn btn-outline-success" type="button" onclick="getEmployeeList()">Tìm kiếm</button>
+                            </form>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </nav>
 <body >
 <header>
     <div class="container-fluid">
@@ -82,36 +162,35 @@
             </nav>
         </div>
     </div>
-</header>
-<div class="container" style="background-color: white" >
+</nav>
+<div class="container">
 
     <h1 class="text-center">Danh sách Đồ Chơi</h1>
     <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#modelId">
         Thêm mới sản phẩm
     </button>
-    <!--    <div class="mb-2">-->
-    <!--        <input-->
-    <!--                type="text"-->
-    <!--                name="name"-->
-    <!--                id="name"-->
-    <!--                placeholder="search..."-->
-    <!--                class="mb-3"-->
-    <!--        />-->
-    <!--        <button type="button" onclick="loadToy()">Search</button>-->
-    <!--    </div>-->
+    <div class="mb-2">
+        <input
+                type="text"
+                name="name"
+                id="name"
+                placeholder="search..."
+                class="mb-3"
+        />
+        <button type="button" onclick="loadToy()">Search</button>
+    </div>
     <div>
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>Stt</th>
-                <th>Tên Sản Phẩm</th>
-                <th>Giá(Vnd)</th>
-                <th>Mô tả</th>
-                <th>Thương hiệu</th>
-                <th>Xuất xứ</th>
-                <th>Chất liệu</th>
-                <th>Ảnh</th>
-                <th>Loại Đồ Chơi</th>
+                <th>id</th>
+                <th>name</th>
+                <th>Price(Vnd)</th>
+                <th>Description</th>
+                <th>Brand</th>
+                <th>Origin</th>
+                <th>Material</th>
+                <th>Type Toy</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -157,55 +236,45 @@
             </div>
             <div class="modal-body">
                 <form id="addToyForm">
-                    <div class="form-group">
-                        <label for="name1">Tên sản phẩm</label>
+                    <div class="mb-3">
+                        <label for="name1" class="form-label">Tên sản phẩm</label>
                         <input type="text" class="form-control" id="name1" name="name1" required>
-                        <div class="error-message text-danger" id="name-error"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="price">Giá</label>
+                    <div class="mb-3">
+                        <label for="price" class="form-label">Giá</label>
                         <input type="text" class="form-control" id="price" name="price" required>
-<!--                        <div class="error-message text-danger" id="price-error"></div>-->
                     </div>
-                    <div class="form-group">
-                        <label for="description">Mô tả</label>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Mô tả</label>
                         <input type="text" class="form-control" id="description" name="description" required>
-                        <div class="error-message text-danger" id="description-error"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="brand">Thương Hiệu</label>
+                    <div class="mb-3">
+                        <label for="brand" class="form-label">Thương Hiệu</label>
                         <input type="text" class="form-control" id="brand" name="brand" required>
-                        <div class="error-message text-danger" id="brand-error"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="origin">Xuất Xứ</label>
+                    <div class="mb-3">
+                        <label for="origin" class="form-label">Xuất Xứ</label>
                         <input type="text" class="form-control" id="origin" name="origin" required>
-                        <div class="error-message text-danger" id="origin-error"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="material">Chất Liệu</label>
+                    <div class="mb-3">
+                        <label for="material" class="form-label">Chất Liệu</label>
                         <input type="text" class="form-control" id="material" name="material" required>
-                        <div class="error-message text-danger" id="material-error"></div>
                     </div>
-                    <div class="form-group">
-                        <label for="img">Ảnh</label>
-                        <input type="text" class="form-control" id="img" name="img" required>
-                        <div class="error-message text-danger" id="img-error"></div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label">Loại <span class="span">*</span></label>
-                        <div class="col-md-12" id="toyTypeDTO"></div>
+                    <div class="mb-3">
+                        <label  class="control-label">Loại<span class="span">*</span></label>
+                        <div class="col-md-12" id="toyTypeDTO" >
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button type="button" onclick="add()" class="btn btn-primary">Lưu</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Save</button>
                     </div>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
-
 
 <div class="modal fade" id="update" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="false"
      data-keyboard="false">
@@ -213,65 +282,16 @@
         <div class="modal-content">
             <div class="mt-3">
                 <button type="button" class="close" data-dismiss="modal">X</button>
-                <h3 style="text-align:center; color: #ea0000;">SỬA THÔNG TIN ĐỒ CHƠI</h3>
+                <h3 style="text-align:center; color: #ea0000;">SỬA THÔNG TIN Đồ Chơi</h3>
             </div>
             <div class="modal-body" id="update-form">
-                <form role="form" class="form-horizontal" id="update-toy">
+                <form role="form" class="form-horizontal" id = "update-toy">
                 </form>
             </div>
         </div>
     </div>
 </div>
 </div>
-<footer>
-    <div class="container">
-        <div class="row " style="margin: 0px;padding: 0px">
-            <div class="col-lg-3 col-sm-6 ">
-                <div class="single-box">
-                    <img src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/da99b81a-3220-444b-bac9-3b21f51335b8/d4yoay9-ea3327f9-15e0-49b0-80e7-c625d6327b44.jpg?to...apH6hYh0" alt="" height="60" width="60">
-                    <p>Đăng kí nhận thông tin ưu đãi hàng tuần của chúng tôi để kịp thời tham gia các chương trình hấp dẫn. </p>
-                    <h3>We Accect</h3>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-box">
-                    <h2>Văn phòng</h2>
-                    <ul>
-                        <li><a href="#">Codegym Đà Nẵng</a></li>
-                        <li><a href="#">Số điện thoại: 1900 2237</a></li>
-                        <li><a href="#">Email: info@toystore.com</a></li>
-                        <li><a href="#">C1022G1</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-box">
-                    <h2>Thông tin liên lạc</h2>
-                    <ul>
-                        <li><a href="#">Lê Trần Anh Huy</a></li>
-                        <li><a href="#">Thái Quang Trường</a></li>
-                        <li><a href="#">Thành Nguyễn</a></li>
-                        <li><a href="#">Trần Trọng Nghĩa</a></li>
-                        <li><a href="#">Trần Văn Anh Quân</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-lg-3 col-sm-6">
-                <div class="single-box">
-                    <h2>Đăng ký nhận tin khuyến mãi</h2>
-                    <p>Vui lòng nhập email | hoặc số điện thoại | hoặc Facebook của bạn tại ô dưới đây:</p>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Vui lòng nhập" aria-label="Enter your Email ..." aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2"><i class="fa fa-check"></i></span>
-                    </div>
-                    <h2>Follow us on</h2>
-                </div>
-            </div>
-        </div>
-    </div>
-</footer>
-
-
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
