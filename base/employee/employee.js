@@ -12,7 +12,7 @@ function renderPage(employeeList) {
         pageable += `
     <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${employeeList.number - 1})">
-    Before
+    Previous
     </button>
     `;
     }
@@ -22,9 +22,9 @@ function renderPage(employeeList) {
                       ${i}
                       </button>`);
         if (i === employeeList.number + 1) {
-            pageItem.addClass("active");
+            pageItem.addClass("active1");
         } else {
-            pageItem.removeClass("active");
+            pageItem.removeClass("active1");
         }
         pageable += pageItem.prop("outerHTML");
     }
@@ -47,11 +47,11 @@ function getEmployeeIdAndName(id, name) {
 
 // list
 function renderEmployeeList(employeeList) {
+    debugger;
     let elements = "";
-    let stt = 1;
-
-    for (let employee of employeeList.content) {
-        elements += `<tr>
+    let stt = (employeeList.number)*employeeList.size + 1;
+        for (let employee of employeeList.content) {
+            elements += `<tr>
           <td>${stt++}</td>
           <td>${employee.name}</td>
           <td>${employee.dateOfBirth}</td>
@@ -76,7 +76,6 @@ function renderEmployeeList(employeeList) {
     }
     $("#list-employee").html(elements);
 }
-
 function getEmployeeList(page) {
     let search = $("#search").val();
     $.ajax({
@@ -88,6 +87,12 @@ function getEmployeeList(page) {
             "Content-Type": "application/json",
         },
         success: function (data) {
+            console.log(data)
+            if (data.totalElements === 0){
+                document.getElementById("listNull").innerHTML = "Danh sách rỗng";
+            }else {
+                document.getElementById("listNull").innerHTML = "";
+            }
             renderEmployeeList(data);
             renderPage(data);
         },
@@ -139,6 +144,7 @@ $("#add-employee").submit(function (event) {
 });
 
 function addEmployee(name, dateOfBirth, gender, address, phoneNumber, levelEmployeeDTO) {
+    let mes = "";
     $.ajax({
         headers: {
             Accept: "application/json",
@@ -161,10 +167,17 @@ function addEmployee(name, dateOfBirth, gender, address, phoneNumber, levelEmplo
             $(".modal-backdrop").remove();
             getEmployeeList();
         },
-        error: function () {
-            alert("Lỗi khi thêm nhân viên!");
+        error: function (data) {
+            debugger;
+            console.log(Object.keys(data.responseJSON))
+            for (let key of Object.keys(data.responseJSON)) {
+                const cusKey = `${key[0].toUpperCase()}${key.substring(1)}`;
+                if (document.getElementById(`add${cusKey}Valid`)) {
+                    document.getElementById(`add${cusKey}Valid`).innerText = data.responseJSON[key] ?? '';
+                }
+            }
         },
-    });
+    })
 }
 
 function getSelectLevelEmployeeList() {
