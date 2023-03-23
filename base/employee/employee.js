@@ -12,7 +12,7 @@ function renderPage(employeeList) {
         pageable += `
     <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${employeeList.number - 1})">
-    Before
+    Previous
     </button>
     `;
     }
