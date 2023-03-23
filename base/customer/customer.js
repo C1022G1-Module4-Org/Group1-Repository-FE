@@ -8,16 +8,16 @@ function renderPage(customers) {
     if (customers.number <= customers.totalPages - 1
         && customers.number > 0) {
         page += `
-    <button class="page-item btn btn-primary btn-sm" 
+    <button class="page-item btn  btn-sm" style="border-color: whitesmoke"
     onclick="movePage(${customers.number - 1})">
        Previous
     </button>
     `
     }
     for (let i = 1; i <= customers.totalPages; i++) {
-        let pageItem = $(`<button class="page-item number btn btn-primary btn-sm"
+        let pageItem = $(`<button style="border-color: whitesmoke" class="page-item number btn  btn-sm pagination-sm"
                       onclick="movePage(${i - 1})">
-                      ${i}
+                      ${i} 
                       </button>`);
         if (i === customers.number + 1) {
             pageItem.addClass("active");
@@ -27,9 +27,9 @@ function renderPage(customers) {
         page += pageItem.prop('outerHTML');
     }
 
-    if (customers.number >= 0 && customers.number < customers.totalPages) {
+    if (customers.number >= 0 && customers.number < customers.totalPages -1) {
         page += `
-    <button class="page-item btn btn-primary btn-sm" 
+    <button class="page-item btn btn-sm" style="border-color: whitesmoke"
     onclick="movePage(${customers.number + 1})">
     Next
     </button>
@@ -79,8 +79,15 @@ function loadCustomer(page) {
 
             "Content-Type": "application/json",
         }, success: function (data) {
+            if (data.totalElements ===0){
+                document.getElementById("mess").innerText="!Không tìm thấy thông tin";
+            }else {
+                document.getElementById("mess").innerText="";
+
+            }
             renderCustomers(data.content);
             renderPage(data);
+
         }, error: function (error) {
             console.log(error);
         }
