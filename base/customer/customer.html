@@ -97,7 +97,7 @@
 
     <h1 style="text-align: center">Danh sách Khách hàng</h1>
     <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#modelId">
-        Create
+        Thêm mới
     </button>
     <div class="mb-2">
         <input type="text" name="name" id="name" placeholder="search..." class="mb-3"/>
@@ -107,11 +107,11 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>ID</th>
-                <th>NAME</th>
-                <th>PHONE NUMBER</th>
-                <th>ADDRESS</th>
-                <th style="text-align: center">TYPE OFF CUSTOMER</th>
+                <th>STT</th>
+                <th>TÊN</th>
+                <th>SỐ ĐIỆN THOẠI</th>
+                <th>ĐỊA CHỈ</th>
+                <th style="text-align: center">LOẠI KHÁCH HÀNG</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -162,25 +162,29 @@
             <div class="modal-body">
                 <form id="addCustomerForm">
                     <div class="mb-3">
-                        <label for="name1" class="form-label">Tên khách hàng<span class="span">*</span></label>
+                        <label for="name1" class="form-label">Tên khách hàng<span class="span" style="color: red;">*</span></label>
                         <input type="text" class="form-control" id="name1" name="name1" required>
+                        <div class="error-message text-danger" id="name-error"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="phoneNumber" class="form-label">Số điện thoại<span class="span">*</span></label>
+                        <label for="phoneNumber" class="form-label">Số điện thoại<span class="span" style="color: red;">*</span></label>
                         <input type="text" class="form-control" id="phoneNumber" name="phoneNumber" required>
+                        <div class="error-message text-danger" id="phoneNumber-error"></div>
                     </div>
                     <div class="mb-3">
-                        <label for="address" class="form-label">Địa chỉ</label>
+                        <label for="address" class="form-label">Địa chỉ<span class="span" style="color: red;">*</span></label>
                         <textarea class="form-control" id="address" name="address" rows="3"></textarea>
+                        <div class="error-message text-danger" id="address-error"></div>
+
                     </div>
                     <div class="mb-3">
-                        <label  class="control-label">Danh mục<span class="span">*</span></label>
+                        <label  class="control-label">Danh mục<span class="span" style="color: red;">*</span></label>
                         <div class="col-md-12" id="customerTypeDTO" >
                         </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-primary" onclick="add()">Save</button>
                     </div>
                 </form>
             </div>
@@ -206,6 +210,7 @@
         </div>
     </div>
 </div>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
