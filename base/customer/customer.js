@@ -20,9 +20,9 @@ function renderPage(customers) {
                       ${i} 
                       </button>`);
         if (i === customers.number + 1) {
-            pageItem.addClass("active");
+            pageItem.addClass("active1");
         } else {
-            pageItem.removeClass("active");
+            pageItem.removeClass("active1");
         }
         page += pageItem.prop('outerHTML');
     }
@@ -159,6 +159,7 @@ function saveCustomer(name, phoneNumber, address, customerTypeDTO) {
         }),
         success: function () {
             alert("Thêm khách hàng thành công!");
+            loadCustomer();
             $('#modelId').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();

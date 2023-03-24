@@ -3,45 +3,48 @@ function movePage(nextPage) {
 }
 
 function renderPage(promotions) {
-    let page = "";
-    if (promotions.number == promotions.totalPages - 1 && promotions.number > 0) {
-        page += `
-    <button class="page-item btn btn-primary " 
+    let pageable = "";
+    if (
+        promotions.number <= promotions.totalPages - 1 &&
+        promotions.number > 0
+    ) {
+        pageable += `
+    <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${promotions.number - 1})">
-    <i class="ti-angle-left"></i>
+    Previous
     </button>
-    `
+    `;
     }
     for (let i = 1; i <= promotions.totalPages; i++) {
-        let pageItem = $(`<button class="page-item number btn btn-primary"
+        let pageItem = $(`<button class="page-item number btn btn-dark btn-sm"
                       onclick="movePage(${i - 1})">
                       ${i}
                       </button>`);
         if (i === promotions.number + 1) {
-            pageItem.addClass("active");
+            pageItem.addClass("active1");
         } else {
-            pageItem.removeClass("active");
+            pageItem.removeClass("active1");
         }
-        page += pageItem.prop('outerHTML');
+        pageable += pageItem.prop("outerHTML");
     }
 
-    if (promotions.number == 0 && promotions.number < promotions.totalPages) {
-        page += `
-    <button class="page-item btn btn-primary" 
+    if (promotions.number >= 0 && promotions.number < promotions.totalPages - 1) {
+        pageable += `
+    <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${promotions.number + 1})">
-    <i class="ti-angle-right"></i>
+    Next
     </button>
-    `
+    `;
     }
-    $("#paging").html(page);
+    $("#paging").html(pageable);
 }
 
 // List
 // -danh sách sản phẩm cần được render lên browser
 function renderPromotion(promotions) {
-    let stt = 1;
+    let stt = promotions.number*promotions.size + 1;
     let elements = "";
-    for (let promotion of promotions) {
+    for (let promotion of promotions.content) {
         elements +=
             `<tr>
         <td >${stt++}</td>
@@ -59,7 +62,7 @@ function renderPromotion(promotions) {
             </td>
         <td>
         <button type="button"
-                className="btn btn-danger"
+                class="btn btn-danger"
                 data-toggle="modal" data-target="#exampleModal"
                 onclick="getPromotionInfo(${promotion.id}, '${promotion.name}')">
             Xóa
@@ -74,14 +77,17 @@ function renderPromotion(promotions) {
 }
 
 function loadPromotion(page) {
-    let search = document.getElementById("idSearch").value;
+    let search = $("#idSearch").val();
     $.ajax({
-        type: "GET", url: `http://localhost:8080/promotion?page=${page ? page : "0"}&name=` + search,
+        type: "GET",
+        url: `http://localhost:8080/promotion?name=${search}&page=${
+            page ? page : "0"
+        }`,
         headers: {
 
             "Content-Type": "application/json",
         }, success: function (data) {
-            renderPromotion(data.content);
+            renderPromotion(data);
             renderPage(data);
         }, error: function (error) {
             console.log(error);
@@ -115,7 +121,6 @@ function deletePromotion(id) {
         success: function (data) {
             console.log("Delete Success");
             loadPromotion();
-
             $('#exampleModal').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
@@ -128,31 +133,31 @@ function deletePromotion(id) {
 
 // add
 $("#addPromotionForm").submit(function (event) {
-
+    debugger
     event.preventDefault();
     let name = $('#name1').val();
-    let startday = $('#startDay').val();
+    let startDay = $('#startDay').val();
     let endDay = $("#endDay").val();
     let discount = $("#discount").val();
-    let promotionTypeDTO = $("#category").val();
-    savePromotion(name, startday, endDay, discount, promotionTypeDTO);
+    let promotionTypeDto = $("#category").val();
+    savePromotion(name, startDay, endDay, discount, promotionTypeDto);
 });
 
-function savePromotion(name, startday, endDay, discount, promotionTypeDTO) {
-
+function savePromotion(name, startDay, endDay, discount, promotionTypeDto) {
+    debugger;
     $.ajax({
+        type: 'POST',
+        url: `http://localhost:8080/promotion`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        url: `http://localhost:8080/promotion`,
-        type: 'POST',
         data: JSON.stringify({
             name: name,
-            startday: startday,
+            startDay: startDay,
             endDay: endDay,
             discount: discount,
-            promotionTypeDTO: {id: promotionTypeDTO},
+            promotionTypeDto: {id: promotionTypeDto},
         }),
         success: function (data) {
             alert("add promotion success!");
@@ -160,8 +165,15 @@ function savePromotion(name, startday, endDay, discount, promotionTypeDTO) {
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
         },
-        error: function () {
-            alert("Error!");
+        error: function (data) {
+            debugger;
+            console.log(Object.keys(data.responseJSON))
+            for (let key of Object.keys(data.responseJSON)) {
+                const cusKey = `${key[0].toUpperCase()}${key.substring(1)}`;
+                if (document.getElementById(`add${cusKey}Valid`)) {
+                    document.getElementById(`add${cusKey}Valid`).innerText = data.responseJSON[key] ?? '';
+                }
+            }
         },
     })
 }
@@ -185,18 +197,17 @@ function getSelectPromotionTypeList() {
 function showPromotionTypeSelectOption(promotionTypes) {
     let element = "";
     element += `
-  <select class="form-control" id="category" name="category">
+  <select class="form-control" id="category">
   `
 
     for (let promotionType of promotionTypes) {
-        element += `<option value="${promotionType.name}">`
+        element += `<option value="${promotionType.id}">`
         element += promotionType.name;
         `</option>`
     }
 
     `</select>`;
     $("#promotionType").html(element);
-    $("#promotion-typeDTO").html(element);
 }
 
 $(document).ready(function () {
@@ -204,19 +215,51 @@ $(document).ready(function () {
 });
 // update
 $("#update-promotion").submit(function (event) {
-    debugger
+
     event.preventDefault();
     let id = $("#update-id").val();
     let name = $('#update-name').val();
-    let startday = $('#update-startDay').val();
-    let endday = $("#update-endDay").val();
+    let startDay = $('#update-startDay').val();
+    let endDay = $("#update-endDay").val();
     let discount = $("#update-discount").val();
-    let promotionTypeDTO = $("#category").val();
-    updatePromotion(id, name, startday, endday, discount, promotionTypeDTO);
+    let promotionTypeDto = $("#category").val();
+    updatePromotion(id, name, startDay, endDay, discount, promotionTypeDto);
 })
 
-function updatePromotion(id, name, startday, endday, discount, promotionTypeDTO) {
+function getSelectPromotionTypeListUpdate() {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/promotion-type`,
+        headers: {
+            "Content-Type": "application/json",
+        },
+        success: function (data) {
+            showPromotionTypeSelectOptionUpdate(data);
+        },
+        error: function (error) {
+            console.log(error);
+        },
+    });
+}
 
+function showPromotionTypeSelectOptionUpdate(promotionTypes) {
+    let element = "";
+    element += `
+  <select class="form-control" id="category">
+  `
+
+    for (let promotionType of promotionTypes) {
+        element += `<option value="${promotionType.id}">`
+        element += promotionType.name;
+        `</option>`
+    }
+
+    `</select>`;
+    $("#promotion-typeDTO").html(element);
+}
+
+function updatePromotion(id, name, startDay, endDay, discount, promotionTypeDto) {
+    debugger
     $.ajax({
         type: "PUT",
         url: `http://localhost:8080/promotion/${id}`,
@@ -227,12 +270,13 @@ function updatePromotion(id, name, startday, endday, discount, promotionTypeDTO)
         data: JSON.stringify({
             id: id,
             name: name,
-            startday: startday,
-            endday: endday,
+            startDay: startDay,
+            endDay: endDay,
             discount: discount,
-            promotionTypeDTO: {id: promotionTypeDTO},
+            promotionTypeDto: {id: promotionTypeDto},
         }),
         success: function (data) {
+            debugger;
             alert("Edit success!");
             $("#update").hide();
             $("body").removeClass("modal-open");
@@ -254,7 +298,7 @@ function getPromotionInfoUpdate(id) {
         type: "get",
         url: `http://localhost:8080/promotion/${id}`,
         success: function (data) {
-            getSelectPromotionTypeList();
+            getSelectPromotionTypeListUpdate();
             let element = "";
             let promotion = data;
             element +=
@@ -274,19 +318,19 @@ function getPromotionInfoUpdate(id) {
       <div class="form-group">
         <label for="update-startDay" class="control-label col-xs-3">ngày bắt đầu</label>
         <div class="col-md-12">
-          <input type="text" class="form-control" id="update-startDay" value="${promotion.startday}">
+          <input type="date" class="form-control" id="update-startDay" value="${promotion.startDay}">
         </div>
       </div>
       <div class="form-group">
         <label for="update-endDay" class="control-label col-xs-3">ngày kết thúc</label>
         <div class="col-md-12">
-          <input required type="text" class="form-control" id="update-endDay" name="update-endDay" value="${promotion.endDay}">
+          <input required type="date" class="form-control" id="update-endDay" name="update-endDay" value="${promotion.endDay}">
         </div>
       </div>
       <div class="form-group">
         <label for="update-discount" class="control-label col-xs-3">Discount</label>
         <div class="col-md-12">
-          <input required type="text" class="form-control" id="update-endDay" name="update-discount" value="${promotion.discount}">
+          <input required type="text" class="form-control" id="update-discount" name="update-discount" value="${promotion.discount}">
         </div>
       </div>
       <div class="form-group">

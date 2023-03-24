@@ -1,4 +1,3 @@
-// pagination
 function movePage(page) {
     getEmployeeList(page);
 }

@@ -7,189 +7,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="/blog/css/style.css">
-    <link rel="stylesheet" href="/blog/css/bootstrap.css">
-    <link rel="stylesheet" href="/blog/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <!-- or -->
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font-icon css-->
+    <link rel="stylesheet" type="text/css"
+          href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/base/css/style.css">
+    <link rel="stylesheet" href="/base/css/bootstrap.css">
+    <link rel="stylesheet" href="/base/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/base/home.css">
     <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            /*background-image: url("/img/bg.jpeg");*/
-            margin: 0;
-            padding: 0;
-            line-height: normal !important;
-            font-size: 16px;
-            font-family: -webkit-pictograph;
-            font-weight: 400;
-            -webkit-font-smoothing: antialiased;
-            -webkit-text-size-adjust: 100%;
-        }
-
-        #header-nav {
-            /*background-image: url();*/
-            background-size: cover;
-            background-repeat: no-repeat;
-        }
-
-        .c-item {
-            height: 600px;
-        }
-
-        .c-img {
-            height: 100%;
-            /*object-fit: cover;*/
-            filter: brightness(0.6);
-        }
-
-        .col-center {
-            margin: 0 auto;
-            float: none !important;
-        }
-
-        .container .carousel {
-            margin: 50px auto;
-            padding: 0 70px;
-        }
-
-        .container .carousel-item {
-            color: #999;
-            font-size: 14px;
-            text-align: center;
-            overflow: hidden;
-            min-height: 290px;
-        }
-
-        .container .carousel .item .img-box {
-            width: 135px;
-            height: 135px;
-            margin: 0 auto;
-            padding: 5px;
-            border: 1px solid #ddd;
-            border-radius: 50%;
-        }
-
-        .container .carousel .img-box img {
-            width: 100%;
-            height: 100%;
-            display: block;
-            border-radius: 50%;
-        }
-
-        .container .carousel .testimonial {
-            padding: 30px 0 10px;
-        }
-
-        .container .carousel .overview {
-            font-style: italic;
-        }
-
-        .container .carousel .overview b {
-            text-transform: uppercase;
-            color: #db584e;
-        }
-
-        .container .carousel .carousel-control {
-            width: 40px;
-            height: 40px;
-            margin-top: -20px;
-            top: 50%;
-            background: none;
-        }
-
-        .container .carousel-control i {
-            font-size: 68px;
-            line-height: 42px;
-            position: absolute;
-            display: inline-block;
-            color: rgba(0, 0, 0, 0.8);
-            text-shadow: 0 3px 3px #e6e6e6, 0 0 0 #000;
-        }
-
-        .container .carousel .carousel-indicators {
-            bottom: -40px;
-        }
-
-        .container .carousel-indicators li, .carousel-indicators li.active {
-            width: 10px;
-            height: 10px;
-            margin: 1px 3px;
-            border-radius: 50%;
-        }
-
-        .container .carousel-indicators li {
-            background: #999;
-            border-color: transparent;
-            box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.2);
-        }
-
-        .container .carousel-indicators li.active {
-            background: #555;
-            box-shadow: inset 0 2px 1px rgba(0, 0, 0, 0.2);
-        }
-        footer {
-            background: #101010;
-            padding: 86px 0;
-        }
-        .single-content {
-            text-align: center;
-            padding: 115px 0;
-        }
-        .single-box p {
-            color: #fff;
-            line-height: 1.9;
-        }
-        .single-box h3 {
-            font-size: 16px;
-            font-weight: 700;
-            color: #fff;
-        }
-        .single-box .card-area i {
-            color: #ffffff;
-            font-size: 20px;
-            margin-right: 10px;
-        }
-        .single-box ul {
-            list-style: none;
-            padding: 0;
-        }
-        .single-box ul li a {
-            text-decoration: none;
-            color: #fff;
-            line-height: 2.5;
-            font-weight: 100;
-        }
-        .single-box h2 {
-            color: #fff;
-            font-size: 20px;
-            font-weight: 700;
-        }
-        #basic-addon2 {
-            background: #fe1e4f;
-            color: #fff;
-        }
-        .socials i {
-            font-size: 18px;
-            margin-right: 15px;
-        }
-        @media (max-width: 767px) {
-            .single-box {
-                margin-bottom: 50px;
-            }
-        }
-        @media (min-width: 768px) and (max-width: 991px) {
-            .single-box {
-                margin-bottom: 50px;
-            }
+        .active1{
+            margin: 10px 7px;
+            background: white;
+            color: black;
         }
     </style>
 </head>
 <body>
-haha
 <header>
     <div class="container-fluid">
         <div class="row">
@@ -206,22 +54,25 @@ haha
                         <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
                             style="--bs-scroll-height: 100px;">
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/customer/home.html">Trang chủ</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/home.html?_ijt=jbptvsc808jfuaq1od6tuekkba&_ij_reload=RELOAD_ON_SAVE">Trang chủ</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/blog/blog.html">Blog</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/blog/blog.html?_ijt=jbptvsc808jfuaq1od6tuekkba&_ij_reload=RELOAD_ON_SAVE">Cẩm nang</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/product/toycreate.html">Product</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/product/toycreate.html?_ijt=te7ih23lf9fkilmihh33to0e47&_ij_reload=RELOAD_ON_SAVE">Sản phẩm</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/employee/employee.html">Employee</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/employee/employee.html?_ijt=jbptvsc808jfuaq1od6tuekkba&_ij_reload=RELOAD_ON_SAVE">Nhân viên</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="/customer/customer.html">Customer</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/customer/customer.html?_ijt=jbptvsc808jfuaq1od6tuekkba&_ij_reload=RELOAD_ON_SAVE">Khách hàng</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active text-white" aria-current="page" href="login.jsp">Supplier</a>
+                                <a class="nav-link active text-white" aria-current="page" href="http://localhost:63343/Group1-Repository-FE/base/promotion/promotion.html?_ijt=79ih8ucue6sv0munu65m9hg36m&_ij_reload=RELOAD_ON_SAVE">Mã giảm giá</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active text-white" aria-current="page" href="login.jsp">Đăng nhập</a>
                             </li>
                         </ul>
                         <form class="d-flex" style="margin-top: 16px; margin-right: 10px">
@@ -234,7 +85,6 @@ haha
         </div>
     </div>
 </header>
-
 <div class="container">
 
     <h1 style="text-align: center">Danh sách Khách hàng</h1>
@@ -242,7 +92,7 @@ haha
     <div class="element-button">
         <a style="border: groove;" class="btn btn-add btn-sm" href="#" data-toggle="modal"
            data-target="#modelId"><i class="fas fa-plus"></i>
-            +Thêm mới khách hàng</a>
+            Thêm mới khách hàng</a>
 
     </div>
     <div>
@@ -407,7 +257,6 @@ haha
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="/blog/js/bootstrap.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
         crossorigin="anonymous"></script>
@@ -421,7 +270,7 @@ haha
 <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
         crossorigin="anonymous"></script>
+<script src="../js/bootstrap.js"></script>
 <script src="customer.js"></script>
-
 </body>
 </html>

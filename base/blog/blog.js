@@ -12,7 +12,7 @@ function renderPage(blogList) {
         pageable += `
     <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${blogList.number - 1})">
-    Last
+    Previous
     </button>
     `;
     }
@@ -22,9 +22,9 @@ function renderPage(blogList) {
                       ${i}
                       </button>`);
         if (i === blogList.number + 1) {
-            pageItem.addClass("active");
+            pageItem.addClass("active1");
         } else {
-            pageItem.removeClass("active");
+            pageItem.removeClass("active1");
         }
         pageable += pageItem.prop("outerHTML");
     }
@@ -162,8 +162,13 @@ function addBlog(content , title , author , categoryDto) {
             $(".modal-backdrop").remove();
             getBlogList();
         },
-        error: function () {
-            alert("Lỗi khi thêm blog!");
+        error: function (data) {
+            for (let key of Object.keys(data.responseJSON)) {
+                const cusKey = `${key[0].toUpperCase()}${key.substring(1)}`;
+                if (document.getElementById(`add${cusKey}Valid`)) {
+                    document.getElementById(`add${cusKey}Valid`).innerText = data.responseJSON[key] ?? '';
+                }
+            }
         },
     });
 }

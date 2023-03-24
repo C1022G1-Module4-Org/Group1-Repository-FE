@@ -7,14 +7,14 @@ function renderPage(toy) {
     let page = "";
     if (toy.number == toy.totalPages - 1 && toy.number > 0) {
         page += `
-    <button class="page-item btn btn-primary" 
+   <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${toy.number - 1})">
     <i class="ti-angle-left"></i>
-    </button>
+     Previous </button>
     `
     }
     for (let i = 1; i <= toy.totalPages; i++) {
-        let pageItem = $(`<button class="page-item number btn btn-primary"
+        let pageItem = $(`<button class="page-item btn btn-dark btn-sm" 
                       onclick="movePage(${i - 1})">
                       ${i}
                       </button>`);
@@ -28,10 +28,10 @@ function renderPage(toy) {
 
     if (toy.number == 0 && toy.number < toy.totalPages) {
         page += `
-    <button class="page-item btn btn-primary" 
+    <button class="page-item btn btn-dark btn-sm" 
     onclick="movePage(${toy.number + 1})">
     <i class="ti-angle-right"></i>
-    </button>
+     Next </button>
     `
     }
     $("#paging").html(page);
@@ -40,30 +40,29 @@ function renderPage(toy) {
 // - Toy: danh sách sản phẩm cần được render lên browser
 function renderToy(toys) {
     let elements = "";
+    let stt=1;
     for (let toy of toys) {
         elements +=
             `<tr>
-        <td >${toy.id}</td>
+        <td >${stt++}</td>
         <td >${toy.name}</td>
         <td >${toy.price}</td>
         <td >${toy.description}</td>
         <td >${toy.brand}</td>
         <td >${toy.origin}</td>
         <td >${toy.material}</td>
+         <td style="width: 150px"><img class="w-100" src="${toy.img}" alt=""></td>
         <td >${toy.typeToyDTO.name}</td>
         <td><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" 
                 id="show-emp" data-toggle="modal" data-target="#update"
                 onclick="getToyInfoUpdate(${toy.id})">
-                update
+                 SỬA
             </button></td>
-        <td>
-        <button type="button"
-                className="btn btn-danger"
-                data-toggle="modal" data-target="#exampleModal"
-                onClick="getToyInfo(${toy.id}, '${toy.name}')">
-            Xóa
-        </button>
-        </td>
+            <td><button class="btn btn-danger btn-sm edit" type="button" title="Sửa" 
+                data-toggle="modal" data-target="#exampleModal" 
+                onClick="getToyInfo(${toy.id}, '${toy.name}') ">
+                XÓA
+            </button></td>
     </tr>`;
         // hiện tại đươc hiển thị trên browser
         $("#listToy").html(elements);
@@ -110,13 +109,13 @@ function deleteToy(id) {
         url: `http://localhost:8080/api/${id}`,
         success: function (data) {
             console.log("Xóa thành công");
-
             loadToy
             ();
 
             $('#exampleModal').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
+            loadToy()
         },
         error: function (error) {
             console.log("Lỗi, không xóa được");
@@ -126,22 +125,23 @@ function deleteToy(id) {
 
 
 // add
-$("#addToyForm").submit(
-    function
-        (event) {
-        debugger
-        event.preventDefault();
-        let name = $('#name1').val();
-        let price = $('#price').val();
-        let description = $('#description').val();
-        let brand = $('#brand').val();
-        let origin = $('#origin').val();
-        let material = $("#material").val();
-        let toyTypeDTO = $("#typeToy").val();
-        saveToy(name, price,description,brand,origin,material, toyTypeDTO);
-    });
+function add() {
+    debugger
+    event.preventDefault();
+    let name = $('#name1').val();
+    let price = $('#price').val();
+    let description = $('#description').val();
+    let brand = $('#brand').val();
+    let origin = $('#origin').val();
+    let material = $("#material").val();
+    let img = $("#img").val();
 
-function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
+    let toyTypeDTO = $("#typeToy").val();
+
+    saveToy(name, price,description,brand,origin,material,img, toyTypeDTO);
+};
+
+function saveToy (name,price,description,brand,origin,material,img,toyTypeDTO) {
     debugger
     $.ajax ({
         headers: {
@@ -157,6 +157,7 @@ function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
             brand: brand,
             origin: origin,
             material : material,
+            img : img,
             typeToyDTO: {name:toyTypeDTO},
         }),
         success: function (data) {
@@ -164,10 +165,17 @@ function saveToy (name,price,description,brand,origin,material,toyTypeDTO) {
             $('#modelId').hide();
             $('body').removeClass('modal-open');
             $('.modal-backdrop').remove();
+            loadToy();
         },
-        error: function () {
-            alert("Lỗi khi thêm sản phẩm!");
-        },
+
+        error: function (error) {
+            for (let key of Object.keys(error.responseJSON)) {
+                if ($(`#${key}-error`)) {
+                    $(`#${key}-error`).text(error.responseJSON[key]);
+                }
+            }
+        }
+        ,
     })
 }
 
@@ -254,12 +262,13 @@ $("#update-toy").submit(function(event){
     let brand = $('#update-brand').val();
     let origin = $('#update-origin').val();
     let material = $("#update-material").val();
+    let img = $("#update-img").val();
     let toyTypeDTO = $("#typeToy-update").val();
     console.log(toyTypeDTO)
-    updateToy(id,name, price,description,brand,origin,material, toyTypeDTO);
+    updateToy(id,name, price,description,brand,origin,material,img, toyTypeDTO);
 });
 
-function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO){
+function updateToy(id,name, price,description,brand,origin,material,img, toyTypeDTO){
     debugger
     $.ajax ({
         type: "PUT",
@@ -276,6 +285,7 @@ function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO)
             brand: brand,
             origin: origin,
             material : material,
+            img : img,
             typeToyDTO: {name:toyTypeDTO},
         }),
         success: function (data) {
@@ -290,6 +300,7 @@ function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO)
         },
     })
 }
+
 //Lấy thông tin sản phẩm bằng id
 function getToyInfoUpdate(id) {
     $.ajax({
@@ -346,6 +357,12 @@ function getToyInfoUpdate(id) {
         <label for="update-material" class="control-label col-xs-3">Chất Liệu</label>
         <div class="col-md-12">
           <input required type="text" class="form-control" id="update-material" name="update-material" value="${toy.material}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="update-material" class="control-label col-xs-3">Ảnh</label>
+        <div class="col-md-12">
+          <input required type="text" class="form-control" id="update-img" name="update-img" value="${toy.img}">
         </div>
       </div>
       <div class="form-group">
