@@ -18,6 +18,9 @@ $(document).ready(function () {
     loadPromotion();
 });*/
 function login() {
+    debugger
+    let username = $("#username").val();
+    let password =  $("#password").val();
     $.ajax({
         type: 'POST',
         url: `http://localhost:8080/login`,
@@ -26,14 +29,17 @@ function login() {
             'Content-Type': 'application/json'
         },
         data: JSON.stringify({
-            username: username,
-            password: password,
+            "username": username,
+            "password": password,
         }),
         success: function (data) {
-            window.location.href = '/home.html';
+            console.log(data)
+            sessionStorage.setItem('token', data.token);
+            sessionStorage.setItem('name', data.name);
+            window.location.href = '/base/home.html';
         },
         error: function () {
             alert("Error!");
         },
-    })
+    });
 }

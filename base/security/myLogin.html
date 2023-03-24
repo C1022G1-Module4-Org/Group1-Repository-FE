@@ -14,6 +14,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <script src="myLogin.js"></script>
     <style>
         /* Coded with love by Mutiullah Samim */
         body,
@@ -95,6 +96,7 @@
             background-color: #60a3bc !important;
         }
     </style>
+    <script src="myLogin.js"></script>
 </head>
 <!--Coded with love by Mutiullah Samim-->
 <body>
@@ -113,14 +115,14 @@
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-user"></i></span>
                         </div>
-                        <input type="text" name="username" class="form-control input_user" value=""
+                        <input type="text" name="username" id="username" class="form-control input_user" value=""
                                placeholder="Tên đăng nhập..."/>
                     </div>
                     <div class="input-group mb-2">
                         <div class="input-group-append">
                             <span class="input-group-text"><i class="fas fa-key"></i></span>
                         </div>
-                        <input type="password" name="password" class="form-control input_pass" value=""
+                        <input type="password" name="password" id="password" class="form-control input_pass" value=""
                                placeholder="Mật khẩu...">
                     </div>
                     <div class="form-group">
@@ -131,7 +133,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center mt-3 login_container">
-                        <button type="button" class="btn login_btn" onclick="login()">Đăng nhập</button>
+                        <button type="button" onclick="login()" class="btn login_btn" >Đăng nhập</button>
                     </div>
                 </form>
             </div>
@@ -146,5 +148,6 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.min.js"></script>
 </body>
 </html>

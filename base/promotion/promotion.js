@@ -128,7 +128,6 @@ function deletePromotion(id) {
 
 // add
 $("#addPromotionForm").submit(function (event) {
-    debugger
     event.preventDefault();
     let name = $('#name1').val();
     let startDay = $('#startDay').val();
