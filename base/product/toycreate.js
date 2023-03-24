@@ -262,12 +262,13 @@ $("#update-toy").submit(function(event){
     let brand = $('#update-brand').val();
     let origin = $('#update-origin').val();
     let material = $("#update-material").val();
+    let img = $("#update-img").val();
     let toyTypeDTO = $("#typeToy-update").val();
     console.log(toyTypeDTO)
-    updateToy(id,name, price,description,brand,origin,material, toyTypeDTO);
+    updateToy(id,name, price,description,brand,origin,material,img, toyTypeDTO);
 });
 
-function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO){
+function updateToy(id,name, price,description,brand,origin,material,img, toyTypeDTO){
     debugger
     $.ajax ({
         type: "PUT",
@@ -284,6 +285,7 @@ function updateToy(id,name, price,description,brand,origin,material, toyTypeDTO)
             brand: brand,
             origin: origin,
             material : material,
+            img : img,
             typeToyDTO: {name:toyTypeDTO},
         }),
         success: function (data) {
@@ -355,6 +357,12 @@ function getToyInfoUpdate(id) {
         <label for="update-material" class="control-label col-xs-3">Chất Liệu</label>
         <div class="col-md-12">
           <input required type="text" class="form-control" id="update-material" name="update-material" value="${toy.material}">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="update-material" class="control-label col-xs-3">Ảnh</label>
+        <div class="col-md-12">
+          <input required type="text" class="form-control" id="update-img" name="update-img" value="${toy.img}">
         </div>
       </div>
       <div class="form-group">

@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="333f2849-ab27-4411-87b2-a303915df64a" name="Changes" comment="update customer">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/customer/customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/customer/customer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/product/toycreate.html" beforeDir="false" afterPath="$PROJECT_DIR$/product/toycreate.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,6 +68,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Group1-Repository-FE\base" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Group1-Repository-FE\base\customer" />
     </key>
@@ -85,6 +87,7 @@
       <workItem from="1679062573263" duration="19785000" />
       <workItem from="1679234984386" duration="22449000" />
       <workItem from="1679411298479" duration="12439000" />
+      <workItem from="1679582300708" duration="304000" />
     </task>
     <task id="LOCAL-00001" summary="test">
       <created>1679044196586</created>
