@@ -89,7 +89,7 @@ $(document).ready(function () {
 
 
 // Delete
-function getCustomerInfo(id,name) {
+function getCustomerInfo(id, name) {
     debugger
     document.getElementById("deleteId").value = id;
     document.getElementById("deleteName").innerText = name;
@@ -193,7 +193,6 @@ function showCustomerTypeSelectOption(customerTypes) {
 $(document).ready(function () {
     getSelectCustomerTypeList();
 });
-
 
 
 // update
